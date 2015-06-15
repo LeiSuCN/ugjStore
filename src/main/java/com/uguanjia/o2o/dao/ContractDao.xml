@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.uguanjia.o2o.dao.ContractDao"> 
+
+
+
+	<resultMap type="com.uguanjia.o2o.Contract"  id="Contract">
+		<id property="id" column="id"/>
+		<result property="storeId" column="store_id"/>
+		<result property="time" column="time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+		<result property="type" column="type"/>
+		<result property="status" column="status"/>
+		<result property="strategy" column="strategy"/>
+	</resultMap>
+	
+    <select id="queryContractsCount" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultType="int">
+    	select 
+    		count(0) 
+    	from 
+    		contract 
+    	where 
+    		1 = 1
+    </select>
+    
+    <select id="queryContract" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultMap="Contract">
+    	select 
+    		* 
+    	from 
+    		contract
+    	where
+    		id = #{contractId}
+     	<if test=" storeId > 0">
+    		and store_id = #{storeId}
+    	</if>
+    </select>
+	
+    <select id="queryContracts" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultMap="Contract">
+    	select 
+    		* 
+    	from 
+    		contract
+    	where
+    		1 = 1
+     	<if test=" storeId > 0">
+    		and store_id = #{storeId}
+    	</if>
+     	<if test=" type > 0">
+    		and type = #{type}
+    	</if>
+     	<if test=" status > 0">
+    		and status = #{status}
+    	</if>
+    	order by 
+    		time desc 
+    	<if test=" pageNo > 0 ">
+    	limit 
+    		#{limit}, #{pageSize} 
+    	</if>
+    </select>
+    	
+ 	<insert id="insertContract" useGeneratedKeys="true"  keyProperty="id" >
+		INSERT INTO contract(store_id, type, status, strategy) VALUES (#{storeId}, #{type}, #{status}, #{strategy})
+	</insert>
+	
+	<update id="changeContractStatus">
+		update contract set status = #{1}, comment=#{2} where id = #{0}
+	</update>
+    
+</mapper>

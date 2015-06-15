@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.uguanjia.o2o.dao.StoreDao"> 
+
+	<resultMap type="com.uguanjia.o2o.Store"  id="Store">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="legalPerson" column="legal_person"/>
+		<result property="registrationNo" column="registration_no"/>
+		<result property="phonenumber" column="phonenumber"/>
+		<result property="address" column="address"/>
+		<result property="alipay" column="alipay"/>
+		<result property="area" column="area"/>
+		<result property="lat" column="lat"/>
+		<result property="lon" column="lon"/>
+		<result property="qq" column="qq"/>
+		<result property="status" column="status"/>
+	</resultMap>
+
+	<resultMap type="com.uguanjia.o2o.StoreAccount"  id="StoreAccount">
+		<result property="storeId" column="store_id"/>
+		<result property="name" column="name"/>
+		<result property="bank" column="bank"/>
+		<result property="number" column="number"/>
+	</resultMap>
+	
+	<resultMap type="com.uguanjia.o2o.StoreApplyInfo"  id="StoreApplyInfo">
+		<id property="id" column="id"/>
+		<result property="storeId" column="store_id"/>
+		<result property="status" column="status"/>
+		<result property="date" column="date"  javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+	<resultMap type="com.uguanjia.o2o.StoreServiceAccount" id="StoreServiceAccount">
+		<result property="storeId" column="store_id"/>
+		<result property="type" column="type"/>
+		<result property="account" column="account"/>
+		<result property="password" column="password"/>
+	</resultMap>
+	
+	<resultMap type="com.uguanjia.o2o.meta.StoreProcessActivity" id="StoreProcessActivity">
+		<result property="storeId" column="store_id"/>
+		<result property="time" column="time"  javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+		<result property="status" column="status"/>
+		<result property="operator" column="operator"/>
+		<result property="comment" column="comment"/>
+	</resultMap>
+	
+	<resultMap type="com.uguanjia.o2o.User" id="User">
+		<result property="username" column="username"/>
+		<result property="password" column="password"/>
+		<result property="storeId" column="store"/>
+		<result property="enabled" column="enabled"/>
+	</resultMap>
+	
+	<!--  store_main_info -->
+    <select id="selectStoreMainInfoById" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultMap="Store">
+    	SELECT 
+    		* 
+    	FROM 
+    		store_main_info
+    	WHERE
+    		id = #{storeId}
+    </select>	
+    
+    <select id="selectStoreMainInfo" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultMap="Store">
+    	select 
+    		* 
+    	from 
+    		store_main_info
+    	where
+    		1 = 1
+    	order by 
+    		id desc 
+    	<if test=" pageNo > 0 ">
+    	limit 
+    		#{limit}, #{pageSize} 
+    	</if>
+    </select>
+    
+    <select id="selectAreaStoreCount" resultType="int" >
+    	select 
+    		count(*) 
+    	from 
+    		store_main_info
+    	where
+    		area = #{param1}
+    </select>    
+     
+    <select id="selectStoreCount" resultType="int" >
+    	select 
+    		count(*) 
+    	from 
+    		store_main_info
+    </select>    
+    
+    <insert id="copyStoreMainInfoFromApply">
+        INSERT INTO store_main_info(
+			id,
+			name,
+			registration_no,
+			legal_person,
+			phonenumber,
+			address,
+			alipay,
+			area,
+			qq,
+			lon,
+			lat,
+			status
+		) 
+		SELECT 
+			#{param2},
+			name,
+			registration_no,
+			legal_person,
+			phonenumber,
+			address,
+			alipay,
+			area,
+			lon,
+			qq,
+			lat,
+			0
+		FROM
+			store_main_info_apply
+		WHERE
+			id = #{param1}
+
+	</insert>	
+	
+	<!-- store_account_info  -->
+    <select id="selectStoreAccountInfoById"  parameterType="com.uguanjia.o2o.manger.QueryCondition" resultMap="StoreAccount">
+    	SELECT 
+    		* 
+    	FROM 
+    		store_account_info
+    	WHERE
+    		store_id = #{storeId}
+    </select>	
+    
+	<insert id="copyStoreAccountInfoFromApply">
+		INSERT INTO store_account_info(
+			store_id,
+			name,
+			bank,
+			number
+		) 
+		SELECT 
+			#{param2},
+			name,
+			bank,
+			number
+		FROM
+			store_account_info_apply
+		WHERE
+			store_id = #{param1}
+	</insert>
+	
+	<!--  store_main_info_apply -->
+    <select id="selectStoreApplyMainInfoById" parameterType="com.uguanjia.o2o.manger.QueryCondition"  resultMap="Store">
+    	SELECT 
+    		* 
+    	FROM 
+    		store_main_info_apply 
+    	WHERE
+    		id = #{storeId}
+    </select>	
+    
+    <select id="selectStoreApplyMainInfo" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultMap="Store">
+    	select 
+    		* 
+    	from 
+    		store_main_info_apply
+    	where
+    		1 = 1
+    	order by 
+    		id desc 
+    	<if test=" pageNo > 0 ">
+    	limit 
+    		#{limit}, #{pageSize} 
+    	</if>
+    </select>
+    
+	<insert id="insertStoreApplyMainInfo" useGeneratedKeys="true"  keyProperty="id">
+		INSERT INTO store_main_info_apply(
+			name,
+			registration_no,
+			legal_person,
+			phonenumber,
+			address,
+			alipay,
+			area,
+			qq,
+			lon,
+			lat,
+			status
+		) VALUES(
+			#{name},
+			#{registrationNo},
+			#{legalPerson},
+			#{phonenumber},
+			#{address},
+			#{alipay},
+			#{area},
+			#{qq},
+			#{lon},
+			#{lat},
+			#{status}
+		);	
+	</insert>
+	
+	<update id="updateStoreApplyMainInfo">
+		UPDATE 
+			store_main_info_apply
+		SET
+			name = #{name},
+			registration_no = #{registrationNo},
+			legal_person = #{legalPerson},
+			phonenumber = #{phonenumber},
+			address = #{address},
+			alipay = #{alipay},
+			area = #{area},
+			qq = #{qq},
+			lon = #{lon},
+			lat = #{lat},
+			status = #{status}
+		WHERE
+			id = #{id}
+			
+	</update>
+	
+	<delete id="updateStoreApplyMainInfoStatus">
+		UPDATE
+			store_main_info_apply
+		SET
+			status = #{param2}
+		WHERE
+			id = #{param1}
+	</delete>
+	
+	<delete id="deleteStoreApplyMainInfo">
+		DELETE FROM
+			store_main_info_apply
+		WHERE
+			id = #{param1}
+	</delete>
+	
+	<!-- store_account_info_apply  -->
+    <select id="selectStoreApplyAccountInfoById"  parameterType="com.uguanjia.o2o.manger.QueryCondition" resultMap="StoreAccount">
+    	SELECT 
+    		* 
+    	FROM 
+    		store_account_info_apply 
+    	WHERE
+    		store_id = #{storeId}
+    </select>	
+    
+	<insert id="replaceStoreApplyAccountInfo">
+		REPLACE INTO store_account_info_apply(
+			store_id,
+			name,
+			bank,
+			number
+		) VALUES(
+			#{storeId},
+			#{name},
+			#{bank},
+			#{number}
+		);
+	</insert>
+	
+	<!-- store_process -->
+	<select id="selectStoreProcessesById" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultMap="StoreProcessActivity">
+		SELECT 
+			*
+		FROM
+			store_process
+		WHERE
+			store_id = #{storeId}
+		ORDER BY
+			time asc
+	</select>
+	<insert id="insertStoreProcess">
+		INSERT INTO 
+			store_process(store_id, status, operator, comment)
+		VALUES
+			(#{storeId}, #{status}, #{operator}, #{comment})
+	
+	</insert>
+	
+	<!-- users -->
+    <select id="selectUserByUsername" resultMap="User">
+    	select 
+    		username, enabled, store 
+    	from 
+    		users
+    	where
+    		username = #{param1}
+    </select>
+    
+	<insert id="insertStoreUser"  >
+		INSERT INTO users(
+			username, password, enabled,  store
+		) VALUES(
+			#{username}, #{password}, 1, #{storeId}
+		);
+	</insert>
+	
+	<update id="updateUserStoreId">
+		UPDATE 
+			users
+		SET
+			store = #{param2}
+		WHERE
+			store = #{param1}
+	</update>
+    
+    <update id="updateUserPassword">
+    	update
+    		users
+    	set
+    		password = #{param3}
+    	where
+    		password = #{param2} and username = #{param1}
+    </update>
+
+	<!-- store_service_account -->
+	<select id="selectStoreServiceAccounts" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultMap="StoreServiceAccount">
+		select * from store_service_account where store_id = #{storeId}
+	</select>
+	
+	<insert id="replaceStoreServiceAccount" >
+		replace into
+			store_service_account(store_id, type, account, password)
+		value
+			(#{storeId}, #{type}, #{account}, #{password})
+	</insert>
+	
+	<!-- store_service_account_apply -->
+	<select id="selectStoreApplyServiceAccounts" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultMap="StoreServiceAccount">
+		select * from store_service_account_apply where store_id = #{storeId}
+	</select>
+    
+	<insert id="copyStoreServiceAccountsFromApply">
+		INSERT INTO store_service_account(
+			store_id,
+			type,
+			account,
+			password
+		) 
+		SELECT 
+			#{param2},
+			type,
+			account,
+			password
+		FROM
+			store_service_account_apply
+		WHERE
+			store_id = #{param1}
+	</insert>
+
+	<insert id="replaceStoreApplyServiceAccount" >
+		replace into
+			store_service_account_apply(store_id, type, account, password)
+		value
+			(#{storeId}, #{type}, #{account}, #{password})
+	</insert>
+
+
+
+
+
+
+
+	
+		
+	<insert id="createStore" >
+    	insert into
+    		store(id, name, address, fixed_phonenumber, mobile_phonenumber, lat, lon)
+    	value
+    		(#{id}, #{name}, #{address}, #{fixedPhonenumber}, #{mobilePhonenumber}, #{lat}, #{lon})
+	</insert>
+	
+	<insert id="createUser" >
+    	insert into
+    		users(username, password, enabled, store)
+    	value
+    		(#{param1}, #{param2}, 1, #{param3})
+	</insert>
+	
+	<insert id="createRoleForUser" >
+    	insert into
+    		authorities(username, authority)
+    	value
+    		(#{param1}, #{param2})
+	</insert>
+
+    <select id="selectStoreIdByUsername"  resultType="long">
+    	select store from users where username = #{0} 
+    </select>
+    
+    <select id="queryUsers" resultType="string">
+    	select username from users where store = #{0}
+    </select>
+    
+    <select id="queryStoreById" resultMap="Store">
+    	select 
+    		* 
+    	from 
+    		store
+    	where
+    		id = #{id}
+    </select>
+
+    <select id="queryStoreCount" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultType="int">
+    	select 
+    		count(0) 
+    	from 
+    		store
+    	where
+    		1 = 1
+    </select>
+
+    <select id="queryStores" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultMap="Store">
+    	select 
+    		* 
+    	from 
+    		store
+    	where
+    		1 = 1
+    	<if test=" storeId > 0 ">
+    		and store = #{storeId}
+    	</if>
+    	order by 
+    		id asc 
+    	<if test=" pageNo > 0 ">
+    	limit 
+    		#{limit}, #{pageSize} 
+    	</if>
+    </select>
+    
+    <select id="queryStoresByCode" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultMap="Store">
+    	select 
+    		* 
+    	from 
+    		store
+    	where
+    		id &gt;= #{param1} and id &lt;= #{param2}
+    	order by 
+    		id asc 
+    	<if test=" param3.pageNo > 0 ">
+    	limit 
+    		#{param3.limit}, #{param3.pageSize} 
+    	</if>
+    </select>
+    
+    <update id="changeStoreInfo" >
+    	update
+    		store
+    	set
+    		name = #{name},
+    		address = #{address},
+    		fixed_phonenumber = #{fixedPhonenumber},
+    		mobile_phonenumber = #{mobilePhonenumber},
+    		lat = #{lat},
+    		lon = #{lon}
+    	where
+    		id = #{id}
+    </update>
+    
+</mapper>

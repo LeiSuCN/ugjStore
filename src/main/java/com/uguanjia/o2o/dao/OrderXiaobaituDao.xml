@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.uguanjia.o2o.dao.OrderXiaobaituDao"> 
+
+	<resultMap type="com.uguanjia.o2o.service.xiaobaitu.XiaobaituOrder"  id="XbtOrder">
+		<id property="id" column="id"/>
+		<result property="createTime" column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+		<result property="customerName" column="customer_name"/>
+		<result property="customerPhonenumber" column="customer_phonenumber"/>
+		<result property="customerAddress" column="customer_address"/>
+		<result property="revenue" column="revenue"/>
+		<result property="profit" column="profit"/>
+		<result property="pack" column="pack"/>
+		<result property="payment" column="payment"/>
+		<result property="voucher" column="voucher"/>
+	</resultMap>
+	
+	<resultMap type="com.uguanjia.o2o.service.xiaobaitu.XbtServiceItem"  id="XbtServiceItem">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="category" column="category"/>
+		<result property="price" column="price"/>
+	</resultMap>
+
+	<resultMap type="com.uguanjia.o2o.service.xiaobaitu.XiaobaituOrderItem"  id="XiaobaituOrderItem">
+		<result property="name" column="name" />
+		<result property="amount" column="amount"/>
+		<result property="unitPrice" column="unit_price"/>
+	</resultMap>
+    
+    <insert id="insertOrderXbt">
+    	insert into orders_xbt(id, pack, payment, voucher) values(#{id}, #{pack}, #{payment}, #{voucher})
+    </insert>
+    
+    <insert id="insertOrderXbtItems">
+    	insert into orders_xbt_items(id, name, amount, unit_price) values
+    	<foreach collection="items" item="item" index="index" separator=",">
+    		(${id}, '${item.name}', ${item.amount}, ${item.unitPrice})
+    	</foreach>
+    </insert>
+    
+    <select id="queryOrderById" resultMap="XbtOrder">
+    	select o.*, ox.pack, ox.payment, ox.voucher from orders_xbt ox, orders o  where ox.id = o.id and ox.id = #{0} 
+    </select>
+    
+     <select id="queryItemsById" resultMap="XiaobaituOrderItem">
+     	select i.name, o.amount,o.unit_price from orders_xbt_items o, xbt_items i where o.id = #{0} and o.name = i.id order by o.name asc;
+    </select>
+    
+    <select id="queryAllServiceItems" resultMap="XbtServiceItem">
+    	select * from xbt_items order by id asc
+    </select>
+    
+</mapper>

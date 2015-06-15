@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+    
+  <description>UGJ Process tag lib</description>
+  <display-name>Process TagLib</display-name>
+  <tlib-version>0.5</tlib-version>
+  <short-name>p</short-name>
+  <uri>http://o2o.ugj.com/jsp/jstl/process</uri>
+
+  <tag>
+    <description>
+        get the status name by status id
+    </description>
+    <name>getStatusName</name>
+    <tag-class>com.uguanjia.o2o.web.tag.ProcessTag</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+        <description>
+			status id
+        </description>
+        <name>status</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>
+			status type
+        </description>
+        <name>type</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <description>
+        get the service name by service id
+    </description>
+    <name>getServiceName</name>
+    <tag-class>com.uguanjia.o2o.web.tag.ServiceTag</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+        <description>service id</description>
+        <name>id</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <description>request type</description>
+        <name>type</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <description>
+        get the area name by area code
+    </description>
+    <name>getAreaName</name>
+    <tag-class>com.uguanjia.o2o.web.tag.AreaTag</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+        <description>area code</description>
+        <name>area</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+</taglib>

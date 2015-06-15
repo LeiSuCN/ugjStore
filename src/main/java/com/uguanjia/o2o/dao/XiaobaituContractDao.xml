@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.uguanjia.o2o.dao.XiaobaituContractDao"> 
+
+	<resultMap type="com.uguanjia.o2o.service.xiaobaitu.XiaobaituContract"  id="XiaobaituContract">
+		<result property="yiFang" column="yifang"/>
+		<result property="gongShangZhuCeHao" column="gongshangzhucehao"/>
+		<result property="faDingDaiBiaoRen" column="fadingdaibiaoren"/>
+		<result property="dianHua" column="dianhua"/>
+		<result property="diZhi" column="dizhi"/>
+		<result property="youBian" column="youbian"/>
+	</resultMap>
+	
+	<select id="queryContractById" resultMap="XiaobaituContract">
+		select * from contract_xbt where contract_id = #{0}
+	</select>
+	
+	<insert id="createContract" parameterType="com.uguanjia.o2o.service.xiaobaitu.XiaobaituContract">
+		INSERT INTO 
+			contract_xbt(contract_id, yifang, gongshangzhucehao, fadingdaibiaoren, dianhua, dizhi, youbian) 
+  		VALUES 
+     		(#{id}, #{yiFang}, #{gongShangZhuCeHao}, #{faDingDaiBiaoRen}, #{dianHua}, #{diZhi}, #{youBian});
+	</insert>
+    
+</mapper>

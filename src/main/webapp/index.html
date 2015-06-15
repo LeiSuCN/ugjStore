@@ -1,0 +1,183 @@
+<html>
+<head>
+<title>优管家</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="style/base.css">
+<style type="text/css">
+.mainInfo{
+	min-height: 0px;
+}
+.banner{
+	width: 735px;
+	height: 298px;
+	position: relative;
+	float: left;
+}
+
+.guanggao{  width: 100%;height: 298px; }
+
+.user{
+	height: 298px;
+	width: 230px;
+	float: right;
+}
+
+.user-title{
+	margin: 0px 0px 5px;
+	padding: 0px 3px;
+	font-weight: bold;
+	background: #257DD5;
+	border-radius: 4px;
+	line-height: 22px;
+	font-size: 11px;
+	color: #FFF;
+}
+
+.user ul{
+	margin: 5px 0px 0px 3px;
+}
+
+.user li{
+	padding: 0px 0px 5px 7px ;
+	background: url(style/images/bullet_large.png) no-repeat left 5px;
+	text-align: left;
+	font-size: 0px;
+}
+
+.user li a{
+	color: red;
+	font-size: 11px;
+}
+
+.serviceInfo{
+	padding-top: 12px;
+	background: #FDB812
+}
+
+.serviceInfo a{
+	margin: 15px;
+	display: inline-block;
+	border-radius: 20px;
+	cursor: pointer;
+	background: url(style/images/yewu/service.png);
+	height: 96px
+}
+
+.serviceInfo img{
+  	width: 240px;
+  	height: 96px;
+  	border-style: none;
+}
+
+.serviceInfo img:hover{
+    opacity: 0.3;
+}
+
+.service-title{
+	display: inline-block;
+	padding: 5px 55px;
+	background: #FA7814;  
+	border-top-left-radius: 10px;  
+	border-top-right-radius: 10px;
+	font-size: 18px;
+	font-family: tahoma, arial, 宋体, sans-serif;
+	color:white;
+	background: -webkit-linear-gradient( top,#FE8920,#FC5F02);
+}
+
+</style>
+<script src="js/jquery-1.11.2.min.js"></script>
+</head>
+<body>
+<div class="container" style="margin-top:3em;">
+	<div class="outerWrapper">
+		<div class="innerWrapper">
+			<div class="header">
+				<div class="headerLogo">
+					<img src="style/images/logo.png">
+				</div>
+			</div>
+			<div class="MainMenu">
+				<ul>
+					<li><a class="now">首页</a></li>
+				</ul>
+				<ul>
+					<li><a href="about.html">关于优管家</a></li>
+				</ul>
+				<ul>
+					<li><a href="map.html">查找门店</a></li>
+				</ul>
+				<ul>
+					<li><a href="service.html">顾客服务</a></li>
+				</ul>
+				<ul>
+					<li><a href="notice.html">公告</a></li>
+				</ul>
+				<ul>
+					<li><a href="contactus.html">联系我们</a></li>
+				</ul>
+				<ul>
+					<li><a href="public/my">我的优管家</a></li>
+				</ul>
+			</div>
+			<div class="mainInfo" style="background: #FDB812;padding: 1em 80px 0 80px;">
+
+				<div style="border-bottom: 1px solid #DADADA;">
+					<div style="border-bottom: 2px solid #FA5F02;text-align: left;">
+						<span class="service-title">商务服务</span>
+					</div>
+				</div>
+
+			</div>
+			<div class="serviceInfo">
+				<a href="/order/shunfeng/place" target="_blank"><img src="style/images/yewu/service_shunfeng.jpg"></a>
+				<a href="/order/xiaobaitu/place" target="_blank"><img src="style/images/yewu/service_xiaobaitu.jpg"></a>
+				<a href="/order/yiwangtong/place" target="_blank"><img src="style/images/yewu/service_chongzhi.jpg"></a>
+				<a><img src="style/images/yewu/service_baishihuitong.jpg"></a>
+				<a href="/order/zhaopianchongxi/place" target="_blank"><img src="style/images/yewu/service_zhaopian.jpg"></a>
+				<a><img src="style/images/yewu/service_yinsheng.jpg"></a>
+				<a href="http://cainiaoyz.i56.taobao.com/" target="_blank"><img src="style/images/yewu/service_cainiao.jpg"></a>
+				<a><img src="style/images/yewu/service_jiazheng.jpg"></a>
+				<a href="/store/mall" target="_blank"><img src="style/images/yewu/service_shenzhentong.jpg"></a>
+			</div>
+			<div class="footer">
+				<div class="footerContent">Copyright©  2013-2020    All Rights Reserved</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+
+	function adjustSize(){
+
+		$('.container').css('top', '3em');
+
+		return;
+
+		var browerHeight = document.body.clientHeight;
+
+		var contentHeight = document.body.scrollHeight;
+
+		var containerHeight = $('.container').height();
+
+		if( browerHeight > containerHeight )
+		{
+			var top = (browerHeight - containerHeight - 10)/2;
+			$('.container').css('top', top + 'px');
+		}
+		else
+		{
+			$('.container').css('top', '0px');
+		}
+	}
+
+    $(document).ready(function() {
+
+    	//setTimeout("adjustSize()",500);
+
+        //$( window ).resize( adjustSize );
+
+    });
+</script>
+</html>

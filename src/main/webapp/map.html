@@ -1,0 +1,552 @@
+<html>
+
+<head>
+
+<title>优管家</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<link rel="stylesheet" type="text/css" href="style/base.css">
+
+<style type="text/css">
+
+.mainInfo{
+
+	min-height: 0px;
+
+}
+
+#store_list_container {
+
+	float:left;
+
+	width:240px;
+
+	height: 500px;
+
+	overflow-y: scroll; 
+
+}
+
+
+
+#store_list li{
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	COLOR: #1A75CF;
+
+	margin: 0.5em;
+
+	border-bottom: 1px solid rgba(54, 54, 54, 0.2);
+
+	text-align: left;
+
+}
+
+
+
+#store_list  .store-name{
+
+	font-size: 12px;
+
+	cursor: pointer;
+
+	font-weight: bold;
+
+}
+
+
+
+#store_list  .store-name:hover{
+
+	text-decoration: underline;
+
+}
+
+
+
+#store_list  .store-address{
+
+	font-size: 11px;
+
+	padding-left: 0.5em;
+
+}
+
+
+
+#map_container{
+
+	float:right;
+
+	width: 730px;
+
+	height: 500px;
+
+}	
+
+</style>
+
+<script src="js/jquery-1.11.2.min.js"></script>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=nsNo6385eG8L0jfcaFPVThXX"></script>
+
+</head>
+
+<body>
+
+<div class="container" style="margin-top:3em;">
+
+	<div class="outerWrapper">
+
+		<div class="innerWrapper">
+
+			<div class="header">
+
+				<div class="headerLogo">
+
+					<img src="style/images/logo.png">
+
+				</div>
+
+			</div>
+
+			<div class="MainMenu">
+
+				<ul>
+
+					<li><a href="index.html">首页</a></li>
+
+				</ul>
+
+				<ul>
+
+					<li><a href="about.html">关于优管家</a></li>
+
+				</ul>
+
+				<ul>
+
+					<li><a class="now">查找门店</a></li>
+
+				</ul>
+
+				<ul>
+
+					<li><a href="service.html">顾客服务</a></li>
+
+				</ul>
+
+				<ul>
+
+					<li><a href="notice.html">公告</a></li>
+
+				</ul>
+
+				<ul>
+
+					<li><a href="contactus.html">联系我们</a></li>
+
+				</ul>
+
+				<ul>
+
+					<li><a href="public/my">我的优管家</a></li>
+
+				</ul>
+
+			</div>
+
+			<div class="mainInfo" style="background: #FDB812;padding:0px;">
+
+				<div>
+
+					<label>省：</label>
+
+					<select id="store_area_province" class="store-area-select">
+
+						<option value="44">广东省</option>
+
+					</select>
+
+					<label>市：</label>
+
+					<select  id="store_area_city" class="store-area-select">
+
+						<option value="03">深圳市</option>
+
+					</select>
+
+					<label>区：</label>
+
+					<select id="store_area_sub" class="store-area-select">
+
+						<option value="01">宝安区</option>
+
+						<option value="02">南山区</option>
+
+						<option value="03">福田区</option>
+
+						<option value="04">龙岗区</option>
+
+						<option value="05">罗湖区</option>
+
+						<option value="06">龙华新区</option>
+
+					</select>
+
+				</div>
+
+				<div id="store_list_container" class="secondaryNav">
+
+					<ul id="store_list">
+
+					
+
+					</ul>
+
+				</div>
+
+				<div id="map_container">
+
+				</div>
+
+			</div>
+
+			<div class="footer">
+
+				<div class="footerContent">Copyright©  2013-2020    All Rights Reserved</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+</body>
+
+<script type="text/javascript">
+
+	var map;
+
+	var markers = {};
+
+	var infoWindow;
+
+	var clickedStore;
+
+	var clickedStoreIcon  = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+
+											offset: new BMap.Size(10, 25), // 指定定位位置
+
+											imageOffset: new BMap.Size(0, 0 - 10 * 25) // 设置图片偏移
+
+										});
+
+	var defaultStoreIcon  = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+
+											offset: new BMap.Size(10, 25), // 指定定位位置
+
+											imageOffset: new BMap.Size(0, 0 - 11 * 25) // 设置图片偏移
+
+										});
+
+	var $storeListContainer;
+
+	var $selAreaProvince;
+
+	var $selAreaCity;
+
+	var $selAreaSub;
+
+
+
+
+
+	var opts = {
+
+		width : 200,     // 信息窗口宽度
+
+		height: 100,     // 信息窗口高度
+
+		title : '' , // 信息窗口标题
+
+		enableMessage: false//设置允许信息窗发送短息
+
+	}
+
+
+
+	
+
+	function initialize(){
+
+		$storeListContainer = $('#store_list');
+
+		$selAreaProvince = $('#store_area_province');
+
+		$selAreaCity = $('#store_area_city');
+
+		$selAreaSub = $('#store_area_sub');
+
+		
+
+		$selAreaSub.change(function(){
+
+			refreshMap( $(this).val() );
+
+		});
+
+
+
+	}
+
+
+
+	function refreshMap( subAreaCode ){
+
+		
+
+		if( !subAreaCode )return;
+
+		
+
+		clearMarkers();
+
+		
+
+		$storeListContainer.empty();
+
+		
+
+		var areaCode = $selAreaProvince.val() + $selAreaCity.val() +subAreaCode;
+
+		
+
+		var url = 'public/store/area/' + areaCode + '0000/list';
+
+		
+
+		$.get(url, {}, function(resp){
+
+			
+
+			if( resp && resp.data ){
+
+				
+
+				var maxLat = -999;
+
+				var minLat = 999;
+
+				var maxLon = -999;
+
+				var minLon = 999;
+
+				
+
+				for( var i = 0 ; i < resp.data.length ; i++ ){
+
+					var store = resp.data[i];
+
+					var point = new BMap.Point(store.lon, store.lat);
+
+			        var marker=new BMap.Marker(point,{icon:defaultStoreIcon});
+
+					map.addOverlay(marker);              // 将标注添加到地图中
+
+					
+
+					markers[store.id] = marker;
+
+
+
+					marker.store = store;
+
+
+
+
+
+	
+
+					//infoWindows[store.id] = new BMap.InfoWindow("地址：" + store.address, opts);  // 创建信息窗口对象 
+
+					markers[store.id].addEventListener("click", function(){   
+
+
+
+						var store = this.store;
+
+
+
+						infoWindow.setTitle(store.name);
+
+						infoWindow.setContent("地址：" + store.address);
+
+
+
+						map.openInfoWindow(infoWindow,this.point); //开启信息窗口
+
+					});
+
+					
+
+					if( store.lat > maxLat ){
+
+						maxLat = store.lat;
+
+					}
+
+					if( store.lat < minLat  ){
+
+						minLat = store.lat;
+
+					}
+
+					if( store.lon > maxLon ){
+
+						maxLon = store.lon;
+
+					}
+
+					if( store.lon < minLon  ){
+
+						minLon = store.lon;
+
+					}
+
+					
+
+					// 创建store list  item
+
+					var html = "<li><span class='store-name'>" + store.name +"</span><br><p class='store-address'>" + store.address +"</p></li>";
+
+					
+
+					var $html = $(html);
+
+					
+
+					 $html.data('store_info', store );
+
+					 
+
+					 $html.find('.store-name').click(function(){
+
+						 moveToStoreLocation($(this).parent().data('store_info'));
+
+					 });
+
+					
+
+					$storeListContainer.append(  $html );
+
+				}
+
+				
+
+				if( maxLat != -999 &&  minLat != 999 && maxLon != -999 && minLon != 999 ){
+
+					var centerLat = (maxLat + minLat ) / 2;
+
+					var centerLon =  (maxLon + minLon ) / 2;
+
+					//console.log( centerLon + ',' + centerLat );
+
+					map.setCenter( new BMap.Point(centerLon, centerLat));
+
+				}
+
+			}
+
+		} );
+
+	}
+
+
+
+	function clearMarkers(){
+
+		
+
+		for( var i in markers ){
+
+			map.removeOverlay(markers[i]); 
+
+		}
+
+		
+
+		markers = [];
+
+		clickedStore = false;
+
+	}
+
+
+
+	function moveToStoreLocation( storeInfo ){
+
+		 var storePoint = new BMap.Point(storeInfo.lon, storeInfo.lat);
+
+		 map.setCenter(storePoint);
+
+		 markers[storeInfo.id].setIcon(clickedStoreIcon);
+
+		 if( clickedStore ){
+
+			 markers[clickedStore.id].setIcon(defaultStoreIcon);
+
+		 }
+
+		 
+
+		 clickedStore = storeInfo;
+
+	}
+
+	
+
+	
+
+	
+
+	function createMap(){
+
+		map = new BMap.Map("map_container");
+
+    	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
+    	var point = new BMap.Point(114.065931,22.550059);
+
+    	map.centerAndZoom(point, 11);
+
+
+
+    	infoWindow = new BMap.InfoWindow("地址：", opts);  // 创建信息窗口对象
+
+	}
+
+
+    $(document).ready(function() {
+
+
+
+    	createMap();
+
+
+
+        initialize();
+
+        refreshMap('01');
+
+
+
+    });
+
+</script>
+
+</html>

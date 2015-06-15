@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<head>
+<title>U管家 - 小白兔专业干洗</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" ></meta>
+<style type="text/css">
+body, div, ul, li{ padding: 0px; margin: 0px; }
+ul, li{ text-decoration: none;list-style-type:none }
+
+#itemsTbl th,td{ text-align: center; }
+</style>
+<script src="../../js/jquery-1.11.2.min.js"></script>
+</head>
+<body>
+	<div>
+		<select id="cateSel"></select>
+		<select id="subSel"></select>
+		<input id="countTxt" type="text" value="1"/>
+		<button id="addBtn">添加</button>
+	</div>
+	<div>
+		<table id="itemsTbl"  style="BORDER-COLLAPSE: collapse" borderColor=#808080 height=40 width=400 cellPadding=1 border=1>
+			<thead>
+				<th width=20%>项目</th>
+				<th width=10%>单价</th>
+				<th width=10%>数量</th>
+				<th width=10%>总价</th>
+			</thead>
+			<tbody>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colSpan=3><div style="text-align:right; color:red; font-weight:bold;">总价：</div></td>
+					<td><div style="color:red; font-weight:bold;"></div></td>
+				</tr>
+			</tfoot>
+		</table>
+		<div>
+			<button id="submitBtn">提交</button>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+
+	
+	// 服务项目
+	var _category = {
+		'0101' : {
+			id  : 1010000,
+			name: '上装系列',
+			sub : [ 
+				{ id: '01010001', name:'西装/外套', price:20 },
+				{ id: '01010002', name:'衬衫/T恤', price:15 },
+				{ id: '01010003', name:'夹克（单/棉）', price:20 }
+			]
+		},
+		'0102' : {
+			id  : 1020000,
+			name: '下装系列',
+			sub : [ 
+				{ id: '01020001', name:'西裤', price:15 },
+				{ id: '01020002', name:'长裤/中裤', price:15},
+				{ id: '01020003', name:'牛仔裤', price:15 }
+			]
+		}
+	}
+
+	var cateSel = $('#cateSel');
+	var subSel  = $('#subSel');
+	var countIpt = $('#countTxt');
+	var itemsTbl = $('#itemsTbl');
+
+	/**
+	 * 创建类别select的options
+	 */
+	function createCategorySelectOptions( sele ){
+
+		var sele = $( sele );
+
+		sele.empty();
+
+		for( var cateId in _category ){
+			var option = $('<option value="' + cateId + '">' + _category[cateId].name + '</option>');
+
+			sele.append( option );
+		}
+	}
+
+	/**
+	 * 更新项目选择select的option
+	 */
+	function createSubSelectOptions( cateId, sele ){
+
+		var sele = $( sele );
+		var cate = _category[cateId];
+
+		if( !cate ){
+			return;
+		} 
+
+		sele.empty();
+
+		for( var i = 0 ; i < cate.sub.length ; i++ ){
+			var sub = cate.sub[i];
+			var option = $('<option value="' + sub.id + '">' + sub.name + '</option>');
+
+			sele.append( option );
+		}
+	}
+
+	/**
+	 * 加入新的衣物
+	 */
+	function addNewItem(){
+
+		var sub = getSubItem(subSel.val());
+
+		var count = 0;
+		if( !countIpt.val() || isNaN(countIpt.val()) ){
+			alert( '请输入一个合法的数字' );
+			return;
+		} else{
+			count = parseInt( countIpt.val() );
+		}
+
+		var tb = $('#itemsTbl > tbody ');
+
+		var tr = $('<tr></tr>');
+		tr.attr('item', sub.id);
+		var tds = '';
+		tds += '<td>' + sub.name + '</td>';
+		tds += '<td>' + sub.price + '</td>';
+		tds += '<td>' + count + '</td>';
+		tds += '<td>' + ( sub.price * count ) + '</td>';
+		tr.html( tds );
+		tb.append( tr );
+	}
+
+	/**
+	 * 计算总价
+	 */
+	function computeTotal(){
+
+		var total = 0;
+
+		$('#itemsTbl > tbody > tr ').each( function(){
+			var tr = $( this );
+			var priceTd = tr.find( 'td:last');
+			total += parseInt( priceTd.html() );
+		});
+
+		return total;
+	}
+
+	/**
+	 * 根据子项Id获取子项配置
+	 */
+	function getSubItem( subId ){
+
+		if( !subId || subId.length != 8 ) return false;
+
+		var cateId = subId.substr(0, 4);
+
+		if( _category[cateId] ){
+			var sub = _category[cateId].sub;
+			for( var i = 0 ; i < sub.length ; i++ ){
+				if( sub[i].id == subId )return sub[i];
+			}
+		}
+
+		return false;
+	}
+
+    $(document).ready(function() {
+
+    	createCategorySelectOptions( cateSel );
+    	createSubSelectOptions( cateSel.val(), subSel );
+
+    	cateSel.change( function() { createSubSelectOptions( cateSel.val(), subSel ) });
+
+    	$('#addBtn').click(function(){ 
+    		addNewItem() ;
+    		var total = computeTotal() ;
+    		itemsTbl.find( 'tfoot > tr > td:last > div').html(total);
+    	});
+
+    	$('#submitBtn').click(function(){
+    		$.ajax({
+  				type: "POST",
+  				url: '/order/xbt',
+  				data: { name:'7-11'},
+  				success: function( resp){
+  					alert( resp );
+  				},
+  				dataType: 'json'
+				});
+    	})
+
+    });
+</script>
+</html>

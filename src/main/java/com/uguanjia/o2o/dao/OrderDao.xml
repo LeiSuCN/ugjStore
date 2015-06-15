@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.uguanjia.o2o.dao.OrderDao"> 
+
+	<resultMap type="com.uguanjia.o2o.Order"  id="Order">
+		<id property="id" column="id"/>
+		<result property="createTime" column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+		<result property="customerName" column="customer_name"/>
+		<result property="customerPhonenumber" column="customer_phonenumber"/>
+		<result property="customerAddress" column="customer_address"/>
+		<result property="revenue" column="revenue"/>
+		<result property="profit" column="profit"/>
+	</resultMap>
+	
+	<resultMap type="com.uguanjia.o2o.service.OrderStatistics" id="OrderStatistics">
+		<result property="storeId" column="store_id"/>
+		<result property="type" column="type"/>
+		<result property="time" column="time"/>
+		<result property="amount" column="amount"/>
+		<result property="total" column="total"/>
+	</resultMap>
+
+    <insert id="insertOrder"  useGeneratedKeys="true"  keyProperty="id">
+    	insert into orders(id, store, type, status, customer_name, customer_phonenumber, customer_address, profit, revenue ) 
+    		values(#{id}, #{store}, #{type}, #{status}, #{customerName}, #{customerPhonenumber}, #{customerAddress}, #{profit}, #{revenue})
+    </insert>
+
+    <insert id="insertOrderProcess" >
+    	insert into orders_process(id, status, operator, comment) 
+    		values(#{id}, #{status}, #{operator}, #{comment})
+    </insert>
+    
+    <select id="queryOrderCountsByStore" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultType="int">
+    	select 
+    		count(0) 
+    	from 
+    		orders 
+    	where store = #{storeId} and date(create_time) between #{dateFrom, jdbcType=DATE} and #{dateTo, jdbcType=DATE}
+    		<if test=" status > 0 ">
+    			and status =#{status}
+    		</if>
+    		<if test=" type > 0 ">
+    			and type = #{type}
+    		</if>
+    </select>
+    
+    <select id="queryOrdersByStore" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultMap="Order">
+    	select 
+    		* 
+    	from 
+    		orders
+    	where
+    		store = #{storeId} and date(create_time) between #{dateFrom, jdbcType=DATE} and #{dateTo, jdbcType=DATE}
+    		<if test=" status > 0 ">
+    			and status =#{status}
+    		</if>
+    		<if test=" type > 0 ">
+    			and type = #{type}
+    		</if>
+    	order by 
+    		create_time desc 
+    	<if test=" pageNo > 0 ">
+    	limit 
+    		#{limit}, #{pageSize} 
+    	</if>
+    </select>
+     
+    <select id="queryOrderCount" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultType="int">
+    	select 
+    		count(0) 
+    	from 
+    		orders
+    	where
+    		date(create_time) between #{dateFrom, jdbcType=DATE} and #{dateTo, jdbcType=DATE}
+    		<if test=" status > 0 ">
+    			and status =#{status}
+    		</if>
+    		<if test=" type > 0 ">
+    			and type = #{type}
+    		</if>
+    </select>
+    
+    <select id="queryOrders" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultMap="Order">
+    	select 
+    		* 
+    	from 
+    		orders
+    	where
+    		date(create_time) between #{dateFrom, jdbcType=DATE} and #{dateTo, jdbcType=DATE}
+    		<if test=" status > 0 ">
+    			and status =#{status}
+    		</if>
+    		<if test=" type > 0 ">
+    			and type = #{type}
+    		</if>
+    		<if test=" storeId > 0 ">
+    			and store = #{storeId}
+    		</if>
+    	order by 
+    		create_time desc 
+    	<if test=" pageNo > 0 ">
+    	limit 
+    		#{limit}, #{pageSize} 
+    	</if>
+    </select>
+    
+    <select id="queryOrderById" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultMap="Order">
+    	select * from orders where id = #{orderId} 
+    	<if test=" storeId > 0 ">
+    		and store = #{storeId}
+    	</if>
+    </select>
+    
+    <select id="queryOrderProcessesById" resultType="com.uguanjia.o2o.meta.OrderProcessActivity">
+    	select p.id, s.name as status, p.operator, p.comment, p.time from orders_process p, order_status s where p.status = s.id and p.id = #{0} order by time desc
+    </select>
+     
+    <select id="queryTodayOrderCountById" parameterType="com.uguanjia.o2o.manger.QueryCondition" resultType="int">
+    	select 
+    		count(0) 
+    	from 
+    		orders
+    	where
+    		store = #{storeId} and date(create_time) = curdate()
+    </select>
+    
+    <update id="updateOrderStatus">
+    	update orders set status = #{1} where id = #{0}
+    </update>
+    
+    <!-- statistics_order_month_sumary_store -->
+    <select id="queryOrderMonthStatisticsCount" resultType="int" parameterType="com.uguanjia.o2o.manger.QueryCondition">
+    	select 
+    		count(*)
+    	from
+    		statistics_order_month_sumary_store
+    	where
+    		 time = #{time} and type = #{type}
+    	<if test=" storeId > 0 ">
+    		and store_id = #{storeId}
+    	</if>
+    	
+    </select>
+    <select id="queryOrderMonthStatistics" resultMap="OrderStatistics" parameterType="com.uguanjia.o2o.manger.QueryCondition">
+    	select 
+    		*
+    	from
+    		statistics_order_month_sumary_store
+    	where
+    		 time = #{time} and type = #{type}
+    	<if test=" storeId > 0 ">
+    		and store_id = #{storeId}
+    	</if>
+    	order by 
+    		time desc, type asc, store_id asc
+    	<if test=" pageNo > 0 ">
+    	limit 
+    		#{limit}, #{pageSize} 
+    	</if>
+    	
+    </select>
+    
+</mapper>

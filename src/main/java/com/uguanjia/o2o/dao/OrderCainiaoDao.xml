@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.uguanjia.o2o.dao.OrderCainiaoDao"> 
+
+	<resultMap type="com.uguanjia.o2o.service.cainiao.CainiaoOrder"  id="CainiaoOrder">
+		<result property="time" column="time"/>
+		<result property="code" column="code"/>
+		<result property="storeOrderNo" column="store_order_no"/>
+		<result property="storeName" column="store_name"/>
+		<result property="orderNumber" column="order_number"/>
+		<result property="logisticsCompanyId" column="logistics_company_id"/>
+		<result property="orderSource" column="order_source"/>
+		<result property="orderCreateTime" column="order_create_time"/>
+		<result property="orderArriveTime" column="order_arrive_time"/>
+		<result property="orderTakeTime" column="order_take_time"/>
+		<result property="orderId" column="order_id"/>
+		<result property="sum" column="sum"/>
+		<result property="comment" column="comment"/>
+	</resultMap>
+    
+    <!-- original_data_cainiao -->
+    <select id="queryOrderCount" resultType="int" parameterType="com.uguanjia.o2o.manger.QueryCondition">
+    	select 
+    		count(*) 
+    	from 
+    		original_data_cainiao
+		where
+			time = #{time}
+		<if test=" storeId > 0 ">
+    		and code = #{storeId}
+    	</if>
+    	<if test=" pageNo > 0 ">
+    	limit 
+    		#{limit}, #{pageSize} 
+    	</if>
+    </select>
+    
+    <select id="queryOrders" resultMap="CainiaoOrder" parameterType="com.uguanjia.o2o.manger.QueryCondition">
+    	select 
+    		* 
+    	from 
+    		original_data_cainiao
+		where
+			time = #{time}
+		<if test=" storeId > 0 ">
+    		and code = #{storeId}
+    	</if>
+    	order by 
+    		store_order_no asc
+    	<if test=" pageNo > 0 ">
+    	limit 
+    		#{limit}, #{pageSize} 
+    	</if>
+    </select>
+    
+</mapper>
