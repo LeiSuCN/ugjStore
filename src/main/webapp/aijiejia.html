@@ -10,46 +10,308 @@
 
     <!-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="style/bootstrap.css" />
+    <style type="text/css">
+    #container{ font-size: 16px; font-family: 'Microsoft Yahei',Arial;  }
+
+    .category{/*类目选择*/
+    }
+
+    .category-list-item{
+    	font-size: 12px;
+		border: 1px solid #b3b3b3;
+		border-radius: .5em;
+		padding: .5em;
+		cursor: pointer;
+    }
+
+    .category-list-item:hover{
+    	border: 1px solid red;
+    }
+
+    .category-list-item .item-name{
+    	padding-left: 1em;
+  		float: left;
+    }
+
+    .category-list-item .item-price{
+    	padding-right: 1em;
+  		float: right;
+    }
+
+    .category-list-item input{
+    	text-align: center;
+    }
+
+    .numInput{/*数字输入框*/
+    	display: inline-block;
+    	width: 10em;
+    }
+
+    </style>
 </head>
 
 <body>
 
-	<div class="row">
+	<div class="row" style="max-width:800px; margin:0 auto;" id="container">
 		<div class="col-md-12">
-			<div>
-				<label>姓名:</label><input type="text" />
-				<label>联系电话:</label><input type="text" />
-				<label>服务日期:</label><input type="text" />
-			</div>
-			<div>
-				<label>区域: </label>
-				<select><option>广东省</option></select>
-				<select><option>深圳市</option></select>
-				<select><option>南山区</option></select>
-				<input type="text">
-			</div>
-			<div>
-				<div>
-					<select><option>空调清洗</option></select>
-					<select><option>挂机(全套)</option></select>
-					<span>150 元/台</span>
-					<input type="text" value="1">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="input-group">
+						<span class="input-group-addon">姓名</span>
+						<input type="text" class="form-control">
+					</div>
 				</div>
-				<div>
-					<label>总计:</label><span>150</span>
+				<div class="col-md-4">
+					<div class="input-group">
+						<span class="input-group-addon">联系电话</span>
+						<input type="text" class="form-control">
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="input-group">
+						<span class="input-group-addon">服务日期</span>
+						<input type="text" class="form-control">
+					</div>
 				</div>
 			</div>
-			<div>
-				<label>备注</label>
-				<textarea></textarea>
+			<div class="row">
+				<div class="col-md-12">
+					<select class="form-control" style="display:inline-block; width:30%; ">
+						<option>广东省</option>
+					</select>
+					<select class="form-control" style="display:inline-block; width:30%; ">
+						<option>深圳市</option>
+					</select>
+					<select class="form-control" style="display:inline-block; width:30%; ">
+						<option>南山区</option>
+					</select>
+				</div>
 			</div>
-			<div>
-				<button>提交</button>
+			<div class="row">
+				<div class="col-md-12">
+					<input class="form-control" type="text" placeholder="地址">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<table  class="table table-striped">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>种类</th>
+								<th>单价</th>
+								<th>数量</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>空调 - 窗机</td>
+								<td>100元/台</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>空调 - 挂机(内机)</td>
+								<td>100元/台</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>空调 - 柜机(全套)</td>
+								<td>200元/台</td>
+								<td>1</td>
+							</tr>							
+						</tbody>
+					</table>
+				</div>
+			</div><!-- /.row -->
+
+			<div class="row">
+				<div class="col-md-12">
+					<button class="category btn btn-primary" type="button">空调清洗</button>
+					<button class="category btn btn-primary" type="button">油烟机清洗</button>
+					<button class="category btn btn-primary" type="button">洗衣机清洗</button>
+					<button class="category btn btn-primary" type="button">饮水机清洗</button>
+					<button class="category btn btn-primary" type="button">冰箱清洗</button>
+					<button class="category btn btn-primary" type="button">电脑清洗</button>
+					<button class="category btn btn-primary" type="button">热水器清洗</button>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="category-list-item">
+								<span class="item-name">窗机</span>
+								<span class="item-price">100元/台</span>
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">+</button>
+									</span>
+									<input type="text" class="form-control" value="1">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">-</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="category-list-item">
+								<span class="item-name">挂机(内机)</span>
+								<span class="item-price">100元/台</span>
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">+</button>
+									</span>
+									<input type="text" class="form-control" value="1">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">-</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="category-list-item">
+								<span class="item-name">挂机(全套)</span>
+								<span class="item-price">150元/台</span>
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">+</button>
+									</span>
+									<input type="text" class="form-control" value="1">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">-</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="category-list-item">
+								<span class="item-name">柜机(内机)</span>
+								<span class="item-price">150元/台</span>
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">+</button>
+									</span>
+									<input type="text" class="form-control" value="1">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">-</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div><!-- /.row -->
+					<div class="row">
+						<div class="col-md-3">
+							<div class="category-list-item">
+								<span class="item-name">柜机(全套)</span>
+								<span class="item-price">200元/台</span>
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">+</button>
+									</span>
+									<input type="text" class="form-control" value="1">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">-</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="category-list-item">
+								<span class="item-name">天花机(内机)</span>
+								<span class="item-price">250元/台</span>
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">+</button>
+									</span>
+									<input type="text" class="form-control" value="1">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">-</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="category-list-item">
+								<span class="item-name">天花机(全套)</span>
+								<span class="item-price">300元/台</span>
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">+</button>
+									</span>
+									<input type="text" class="form-control" value="1">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">-</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="category-list-item">
+								<span class="item-name">风管机(内机)</span>
+								<span class="item-price">300元/台</span>
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">+</button>
+									</span>
+									<input type="text" class="form-control" value="1">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button">-</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div><!-- /.row -->
+					<div class="row">
+						<div class="col-md-12" style="text-align:center;">
+							<button type="button" class="btn btn-success">
+							  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>加入
+							</button>
+						</div>
+					</div><!-- /.row -->
+				</div>
 			</div>
 		</div>
 	</div>
 
 </body>
 <script src="js/jquery-1.11.2.min.js"></script>
-<script src="js/bootstrap.js"></script>    	
+<script src="js/bootstrap.js"></script>
+<script type="text/javascript">
+	
+	$(function(){
+		// 类目按钮
+		$('.category').click(function(){
+			var checkedClass = 'btn-warning';// 选中样式
+			var $this = $(this);
+			if( $this.hasClass(checkedClass) ){
+				return;
+			}
+			$('.category').removeClass(checkedClass);
+			$this.addClass(checkedClass);
+
+		});
+
+		// 数字输入控件
+		$('.numInput').each(function(){
+			var $this = $(this);
+			var html = $this.html();
+			//---- 增加自增自减按钮 ----//
+			var preBtn = ''
+				+ '<span class="input-group-btn">'
+				+ '  <button class="btn btn-default" type="button">+</button>'
+				+ '</span>';
+			var postBtn = ''
+				+ '<span class="input-group-btn">'
+				+ '  <button class="btn btn-default" type="button">-</button>'
+				+ '</span>';
+			html = preBtn + html + postBtn;
+			$this.html(html);
+		});
+	})
+</script>    	
 </html>
