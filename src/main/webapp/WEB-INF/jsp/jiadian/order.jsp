@@ -1,15 +1,9 @@
 <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="zh-CN">
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta charset="utf-8" />
-    <title>家电清洁</title>
+<%@include file="/WEB-INF/jsp/common/store_header_quick_order.jsp" %>
 
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-
-    <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="style/bootstrap.css" />
     <style type="text/css">
     #container{ font-size: 16px; font-family: 'Microsoft Yahei',Arial;  }
 
@@ -53,10 +47,7 @@
     }
 
     </style>
-</head>
-
-<body>
-
+    
 	<div class="row" style="max-width:800px; margin:0 auto;" id="container">
 		<div class="col-md-12">
 			<div class="row">
@@ -357,89 +348,7 @@
 
 		</div>
 	</div>
-
-</body>
-<script src="js/jquery-1.11.2.min.js"></script>
-<script src="js/bootstrap.js"></script>
+<%@include file="/WEB-INF/jsp/common/store_footer_quick_order.jsp" %>
 <script type="text/javascript">
-
-	//
-	// 显示类目下的具体项目
-	// 
-	function showCategoryList( category ){
-		console.log( category );
-		// 1.隐藏所有
-		$('.category-list').hide();
-		// 2.显示本类目
-		$('#category_list_' + category).show();
-	}
-
-	//
-	// 将选择的项目加入到清单中去
-	// items: [{id:xxx, name:yyyy, price:zzzz, count:nnnnn}...]
-	//
-	function addToList( category, items ){
-
-		var appendHtml = '';
-
-		var currentRowCount = $('.table > tbody > tr').length;
-		$.each( items, function(i, item){
-			appendHtml += '<tr>';
-			appendHtml += '<td>' + (currentRowCount + i + 1) + '</td>';
-			appendHtml += '<td>' + category + ' - ' + item.name + '</td>';
-			appendHtml += '<td>' + item.price + '</td>';
-			appendHtml += '<td>' + item.count + '</td>';
-			appendHtml += '</tr>';
-		});
-
-		$('.table > tbody').append( appendHtml );
-	}
-	
-	$(function(){
-		// 类目按钮
-		$('.category').click(function(){
-			var checkedClass = 'btn-warning';// 选中样式
-			var $this = $(this);
-			if( $this.hasClass(checkedClass) ){
-				return;
-			}
-			$('.category').removeClass(checkedClass);
-			$this.addClass(checkedClass);
-
-			var category = $this.data('category');
-
-			showCategoryList( category );
-		});
-
-		// 
-		// 选择清洁项目
-		// 
-		$('.category-list-item').click(function(){
-			$(this).toggleClass( 'checked' );
-		});
-
-		// 
-		// 加入清单
-		// 
-		$('.btn-addTo').click(function(){
-			var categoryList = $(this).parents('.category-list');
-			var checkedItems = categoryList.find('.checked');
-
-			var items = [];
-
-			$.each( checkedItems, function(i, checkedItem){
-				var item = {};
-				var checkedItem = $(checkedItem);
-				// {id:xxx, name:yyyy, price:zzzz, count:nnnnn}
-				item.name = checkedItem.find('.item-name').html();
-				item.price = checkedItem.find('.item-price').html();
-				item.count = checkedItem.find('input').val();
-				items.push(item);
-			});
-
-			if( items.length > 0 )
-				addToList( categoryList.attr('id'), items )
-		});
-	})
-</script>    	
+</script>
 </html>

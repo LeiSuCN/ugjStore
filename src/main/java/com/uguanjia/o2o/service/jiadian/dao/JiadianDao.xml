@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.uguanjia.o2o.service.jiadian.dao.JiadianDao"> 
+    
+	<resultMap type="com.uguanjia.o2o.service.jiadian.ServiceItem"  id="JiadianServiceItem">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="category" column="category"/>
+		<result property="price" column="price"/>
+	</resultMap>    
+    
+    <select id="queryAllServiceItems" resultMap="JiadianServiceItem">
+    	select * from orders_jiadian_meta_items by id asc
+    </select>
+    
+</mapper>
