@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
@@ -25,8 +22,6 @@ public class JiadianService
 {
     private final Logger logger = LogManager.getLogger(getClass());
     
-    @Inject
-    @Named("sqlSessionFactoryBean")
     private SqlSessionFactory sqlSessionFactory;
     
     /**
@@ -55,10 +50,14 @@ public class JiadianService
             if( categoryId == 0 ){
                 item.setSub(new ArrayList<ServiceItem>());
                 categoryItems.add(item);
-                dict.put(categoryId, item);
+                dict.put(item.getId(), item);
             } else{
                 ServiceItem category = dict.get(categoryId);
-                category.getSub().add(item);
+                if( category == null ){
+                    logger.error("category of " + categoryId + " is not found in the dict" );
+                } else{
+                    category.getSub().add(item);
+                }
             }
         }
         dict.clear();

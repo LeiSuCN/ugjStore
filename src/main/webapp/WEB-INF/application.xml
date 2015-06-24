@@ -24,7 +24,7 @@
     <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
     	<property name="dataSource"  ref="pooledDataSource"/>
     	<property name="configLocation" value="classpath:mybatis.xml" />
-    	<property name="mapperLocations" value="classpath*:com/uguanjia/o2o/dao/*.xml" />
+    	<property name="mapperLocations" value="classpath*:com/uguanjia/o2o/**/*.xml" />
     </bean>
     
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -61,7 +61,11 @@
     	<property name="ugjCfg"  ref="ugj_cfg"/>
     </bean>
     
+    <!-- Ð¡°×ÍÃ¸ÉÏ´ -->
     <import resource="service_xiaobaitu.xml"/>
+    <!-- ÕÕÆ¬³åÏ´ -->
     <import resource="service_zhaopianchongxi.xml"/>
+    <!-- ¼ÒµçÇå½à -->
+    <import resource="service_jiadian.xml"/>
     
 </beans>

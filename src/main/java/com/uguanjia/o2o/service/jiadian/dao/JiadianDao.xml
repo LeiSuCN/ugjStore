@@ -12,7 +12,12 @@
 	</resultMap>    
     
     <select id="queryAllServiceItems" resultMap="JiadianServiceItem">
-    	select * from orders_jiadian_meta_items by id asc
+    	select 
+    		* 
+    	from 
+    		orders_jiadian_meta_items 
+    	order by 
+    		id asc
     </select>
     
 </mapper>
