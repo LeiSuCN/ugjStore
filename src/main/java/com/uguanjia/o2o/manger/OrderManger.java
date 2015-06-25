@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
@@ -51,7 +52,24 @@ public class OrderManger implements ApplicationContextAware{
 	
 	private SqlSessionFactory sqlSessionFactory;
 	
+	public void create(Order order, Store store){
+		Operator operator = new Operator();
+		// 门店的电话号码即为用户的用户名
+		if( store != null ){
+			operator.setUsername(store.getPhonenumber());
+		}
+		
+		create(order, store, StringUtils.EMPTY, operator);
+	}	
+	
+	public void create(Order order, Store store, Operator operator){
+		create(order, store, StringUtils.EMPTY, operator);
+	}	
 	public void create(Order order, Store store, Contract contract, Operator operator){
+		create(order, store, contract == null ? null : contract.getStrategy(), operator);
+	}
+
+	public void create(Order order, Store store, String strategy, Operator operator){
 		
 		logger.info("begin to create a new order");
 		
@@ -83,7 +101,7 @@ public class OrderManger implements ApplicationContextAware{
 			}
 			
 			ServiceOrderCreatorResult result = 
-					serviceOrderCreator.create(order, contract.getStrategy());
+					serviceOrderCreator.create(order, strategy);
 		
 			if( result == null ){
 				logger.warn("result is null");
@@ -112,7 +130,7 @@ public class OrderManger implements ApplicationContextAware{
 		txManager.commit(status);
 		
 		logger.info("success to create a new order");
-	}
+	}	
 	
 	/**
 	 * @description:查询指定门店的所有订单（分页查询）

@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.uguanjia.o2o.Store;
+import com.uguanjia.o2o.manger.OrderManger;
 import com.uguanjia.o2o.service.jiadian.dao.JiadianDao;
 
 /*******************************************
@@ -22,7 +23,7 @@ public class JiadianService
 {
     private final Logger logger = LogManager.getLogger(getClass());
     
-    private SqlSessionFactory sqlSessionFactory;
+    private OrderManger orderManger;
     
     /**
      * @DESCRIPTION: 查询家电清洁全部的服务项目
@@ -32,9 +33,9 @@ public class JiadianService
      */
     public List<ServiceItem> queryServiceItems(){
         
-        assert sqlSessionFactory != null;
+        assert orderManger != null;
         //
-        SqlSession session = sqlSessionFactory.openSession();
+        SqlSession session = orderManger.getSqlSessionFactory().openSession();
         JiadianDao serviceDao = session.getMapper(JiadianDao.class);
         //
         List<ServiceItem> items = serviceDao.queryAllServiceItems();
@@ -64,10 +65,19 @@ public class JiadianService
         
         return categoryItems;
     }
-
-    public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory)
-    {
-        this.sqlSessionFactory = sqlSessionFactory;
+    
+    /**
+     * 为门店创建订单
+     * @param order 订单内容
+     * @param store 门店
+     */
+    public void createOrder(JiadianOrder order, Store store){
+    	
+    	orderManger.create(order, store);
     }
+
+	public void setOrderManger(OrderManger orderManger) {
+		this.orderManger = orderManger;
+	}
 }
 
