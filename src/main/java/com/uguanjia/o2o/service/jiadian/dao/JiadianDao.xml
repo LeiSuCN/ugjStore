@@ -10,6 +10,17 @@
 		<result property="category" column="category"/>
 		<result property="price" column="price"/>
 	</resultMap>    
+	
+	<resultMap type="com.uguanjia.o2o.service.jiadian.JiadianOrder"  id="JiadianOrder">
+		<id property="id" column="id"/>
+		<result property="serviceTime" column="service_time"/>
+	</resultMap>
+	
+	<resultMap type="com.uguanjia.o2o.service.jiadian.JiadianOrderItem"  id="JiadianOrderItem">
+		<result property="name" column="name" />
+		<result property="amount" column="amount"/>
+		<result property="price" column="price"/>
+	</resultMap>
     
     <select id="queryAllServiceItems" resultMap="JiadianServiceItem">
     	select 
@@ -20,4 +31,33 @@
     		id asc
     </select>
     
+    <select id="queryOrderById" resultMap="JiadianOrder">
+    	select os.service_time from orders_jiadian os where os.id = #{0} 
+    </select>
+    
+    <insert id="insertOrder">
+    	insert 
+    		into orders_jiadian
+    		(id, service_time) 
+    	values
+    		(#{id}, #{serviceTime})
+    </insert>
+    
+     <select id="queryOrderItemsById" resultMap="JiadianOrderItem">
+     	select 
+     		m.name, i.amount, i.price 
+     	from 
+     		orders_jiadian_items i, orders_jiadian_meta_items m  
+     	where 
+     		i.id = #{0} and i.name = m.id
+     	order by 
+     		i.name asc;
+    </select>
+    
+    <insert id="insertOrderItems">
+    	insert into orders_jiadian_items(id, name, amount, price) values
+    	<foreach collection="items" item="item" index="index" separator=",">
+    		(${id}, ${item.code}, ${item.amount}, ${item.price})
+    	</foreach>
+    </insert>    
 </mapper>

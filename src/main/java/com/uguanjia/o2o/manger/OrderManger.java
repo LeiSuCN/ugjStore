@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
@@ -52,19 +51,6 @@ public class OrderManger implements ApplicationContextAware{
 	
 	private SqlSessionFactory sqlSessionFactory;
 	
-	public void create(Order order, Store store){
-		Operator operator = new Operator();
-		// 门店的电话号码即为用户的用户名
-		if( store != null ){
-			operator.setUsername(store.getPhonenumber());
-		}
-		
-		create(order, store, StringUtils.EMPTY, operator);
-	}	
-	
-	public void create(Order order, Store store, Operator operator){
-		create(order, store, StringUtils.EMPTY, operator);
-	}	
 	public void create(Order order, Store store, Contract contract, Operator operator){
 		create(order, store, contract == null ? null : contract.getStrategy(), operator);
 	}

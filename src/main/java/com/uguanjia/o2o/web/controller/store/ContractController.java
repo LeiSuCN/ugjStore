@@ -182,7 +182,8 @@ public class ContractController {
 			
 			if( Service.XIAOBAITU.ID == service.ID 
 					||  Service.ZHAOPIANCHONGXI.ID == service.ID
-					||  Service.YIWANGTONG.ID == service.ID)
+					||  Service.YIWANGTONG.ID == service.ID
+					||  Service.JIADIAN.ID == service.ID)
 			{
 				contract.setStatus(ContractStatus.ACCEPT);
 			}

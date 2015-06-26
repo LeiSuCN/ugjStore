@@ -3,9 +3,37 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="zh-CN">
 <%@include file="/WEB-INF/jsp/common/store_header_quick_order.jsp" %>
-
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/portal/style/css/jquery-ui.min.css" />
+	 <link rel="stylesheet" href="<%= request.getContextPath() %>/portal/style/css/jquery.ui.datepicker.min.css" />
     <style type="text/css">
-    #container{ font-size: 16px; font-family: 'Microsoft Yahei',Arial;  }
+    
+    body{
+    	  background: #FDAA25;
+    	    padding-top: 2em;
+    }
+    	
+    #container{ 
+    	font-size: 16px; 
+    	font-family: 'Microsoft Yahei',Arial; 
+    	max-width:1000px; 
+    	min-width:800px; 
+    	margin:0 auto; 
+    	border-radius:.5em;
+    	background: #19A0D9;
+    	-webkit-box-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    	-moz-box-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    	box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    }
+    
+    #container .row{
+    	margin-top: .5em;
+    	margin-bottom: .5em;
+    }
+    
+    #container .table{
+      background: #B2A7A4;
+  		font-size: .8em;
+  	}
 
     .category{/*类目选择*/
     }
@@ -20,6 +48,7 @@
 		border-radius: .5em;
 		padding: .5em;
 		cursor: pointer;
+		background: #A7C3D2;
     }
 
     .category-list-item:hover{
@@ -30,6 +59,7 @@
     	border: 2px solid #5cb85c;
     	font-weight: bold;
     	color: #5cb85c;
+    	background: #F0B061
     }
 
     .category-list-item .item-name{
@@ -59,47 +89,41 @@
     #list_total span{
       	text-decoration: underline;
     }
+    
+    #ui-datepicker-div{
+    	background: white;
+    }
 
     </style>
     
-	<div class="row" style="max-width:800px; margin:0 auto;" id="container">
-		<div class="col-md-12">
+	<div class="row"  id="container">
+		<form class="col-md-12" action='<c:url value="/order/jiadian" />' method="post" enctype="multipart/form-data" onsubmit="return check()">
 			<div class="row">
 				<div class="col-md-4">
 					<div class="input-group">
 						<span class="input-group-addon">客户姓名</span>
-						<input type="text" class="form-control">
+						<input type="text" class="form-control" name="customerName">
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="input-group">
 						<span class="input-group-addon">联系电话</span>
-						<input type="text" class="form-control">
+						<input type="text" class="form-control" name="customerPhone">
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="input-group">
 						<span class="input-group-addon">服务日期</span>
-						<input type="text" class="form-control">
+						<input type="text" class="form-control" name="serviceDate" id="serviceDate">
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<select class="form-control" style="display:inline-block; width:30%; ">
-						<option>广东省</option>
-					</select>
-					<select class="form-control" style="display:inline-block; width:30%; ">
-						<option>深圳市</option>
-					</select>
-					<select class="form-control" style="display:inline-block; width:30%; ">
-						<option>南山区</option>
-					</select>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<input class="form-control" type="text" placeholder="地址">
+					<div class="input-group">
+						<span class="input-group-addon">详细地址</span>
+						<input type="text" class="form-control" name="customerAddress">
+					</div>
 				</div>
 			</div>
 
@@ -122,7 +146,7 @@
 			</div><!-- /.row -->
 			<div class="row">
 				<div class="col-md-12">
-					<div id="list_total"><label>共计：</label><span>0</span>    <button type="button" class="btn btn-primary  btn-xs">提交订单</button></div>
+					<div id="list_total"><label>共计：</label><span>0</span>    <button type="submit" class="btn btn-primary  btn-xs">提交订单</button></div>
 				</div>
 			</div><!-- /.row -->
 			<div class="row">
@@ -166,7 +190,7 @@
 				</div>
 			</div><!-- /.category_list -->
 			</c:forEach>	
-		</div>
+		</form>
 	</div>
 <%@include file="/WEB-INF/jsp/common/store_footer_quick_order.jsp" %>
 <script type="text/javascript">
@@ -179,6 +203,15 @@ jiadianServiceItems['<c:out value="${serviceItem.id }" />']['sub']['<c:out value
 </c:forEach>
 </script>
 <script type="text/javascript">
+
+	$.datepicker.setDefaults( $.datepicker.regional[ "zh-CN" ] );
+
+	//
+	// 提交前的审核
+	//
+	function check(){
+		
+	}
 
 	//
 	// 显示类目下的具体项目
@@ -267,9 +300,9 @@ jiadianServiceItems['<c:out value="${serviceItem.id }" />']['sub']['<c:out value
 		$.each( items, function(i, item){
 			appendHtml += '<tr data-item-id="' + item.id + '">';
 			appendHtml += '<td>' + (currentRowCount + i + 1) + '</td>';
-			appendHtml += '<td>' + category + ' - ' + item.name + '</td>';
+			appendHtml += '<td>' + category + ' - ' + item.name + '<input type="hidden" name="item_name" value="' + item.id + '" /></td>';
 			appendHtml += '<td>' + item.price + '</td>';
-			appendHtml += '<td class="item-count">' + item.count + '</td>';
+			appendHtml += '<td class="item-count">' + item.count + '<input type="hidden" name="item_count" value="' + item.count + '" /></td>';
 			appendHtml += '<td><span class="glyphicon glyphicon-minus img-circle"></span></td>';
 			appendHtml += '</tr>';
 		});
@@ -280,6 +313,15 @@ jiadianServiceItems['<c:out value="${serviceItem.id }" />']['sub']['<c:out value
 	}
 	
 	$(function(){
+		//
+		//
+		//
+		$('#serviceDate').datepicker({
+			showOtherMonths: true,
+			selectOtherMonths: false,
+		    dateFormat: "yy-mm-dd",
+		    numberOfMonths: 1	
+		});
 		// 类目按钮
 		$('.category').click(function(){
 			var checkedClass = 'btn-success';// 选中样式

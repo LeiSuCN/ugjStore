@@ -2,6 +2,8 @@ package com.uguanjia.o2o.service.jiadian.dao;
 
 import java.util.List;
 
+import com.uguanjia.o2o.service.jiadian.JiadianOrder;
+import com.uguanjia.o2o.service.jiadian.JiadianOrderItem;
 import com.uguanjia.o2o.service.jiadian.ServiceItem;
 
 /*******************************************
@@ -19,6 +21,14 @@ public interface JiadianDao
      * @return
      */
     public List<ServiceItem> queryAllServiceItems();
+    
+    public int insertOrder(JiadianOrder order);
+    
+    public int insertOrderItems(JiadianOrder order);
+    
+    public JiadianOrder queryOrderById(long id);
+    
+    public List<JiadianOrderItem> queryOrderItemsById(long id);
 
 }
 

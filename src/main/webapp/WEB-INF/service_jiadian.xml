@@ -8,7 +8,13 @@
 
 	
 	<bean id="jiadianService" class="com.uguanjia.o2o.service.jiadian.JiadianService" >
-		<property name="sqlSessionFactory"  ref="sqlSessionFactoryBean"/>
+		<property name="orderManger" ref="orderManger"/>
 	</bean>    
+	
+	<bean id="jiadianServiceOrderCreator" 
+		class="com.uguanjia.o2o.service.jiadian.JiadianServiceOrderCreator" scope="prototype"/>    
+
+	<bean id="jiadianServiceOrderQuerier" 
+		class="com.uguanjia.o2o.service.jiadian.JiadianServiceOrderQuerier" scope="prototype"/>    
   
 </beans>

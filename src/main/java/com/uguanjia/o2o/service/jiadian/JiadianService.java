@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.uguanjia.o2o.Store;
 import com.uguanjia.o2o.manger.OrderManger;
 import com.uguanjia.o2o.service.jiadian.dao.JiadianDao;
 
@@ -64,16 +63,6 @@ public class JiadianService
         dict.clear();
         
         return categoryItems;
-    }
-    
-    /**
-     * 为门店创建订单
-     * @param order 订单内容
-     * @param store 门店
-     */
-    public void createOrder(JiadianOrder order, Store store){
-    	
-    	orderManger.create(order, store);
     }
 
 	public void setOrderManger(OrderManger orderManger) {

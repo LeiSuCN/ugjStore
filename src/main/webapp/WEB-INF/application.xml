@@ -61,11 +61,11 @@
     	<property name="ugjCfg"  ref="ugj_cfg"/>
     </bean>
     
-    <!-- Ð¡°×ÍÃ¸ÉÏ´ -->
+    <!-- å°ç™½å…”å¹²æ´— -->
     <import resource="service_xiaobaitu.xml"/>
-    <!-- ÕÕÆ¬³åÏ´ -->
+    <!-- ç…§ç‰‡å†²æ´— -->
     <import resource="service_zhaopianchongxi.xml"/>
-    <!-- ¼ÒµçÇå½à -->
+    <!-- å®¶ç”µæ¸…æ´ -->
     <import resource="service_jiadian.xml"/>
     
 </beans>

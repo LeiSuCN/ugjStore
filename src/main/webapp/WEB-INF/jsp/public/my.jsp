@@ -35,6 +35,15 @@
 }
 </style>
 <script src="<%= request.getContextPath() %>/js/jquery-1.11.2.min.js"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?ad10017b28ca2b9540b3736b706c5fa5";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 </head>
 <body>
 <div class="container" style="margin-top:3em;">
@@ -56,7 +65,7 @@
 					<li><a href="<%= request.getContextPath() %>/map.html">查找门店</a></li>
 				</ul>
 				<ul>
-					<li><a href="<%= request.getContextPath() %>/service.html">顾客服务</a></li>
+					<li><a href="<%= request.getContextPath() %>/service.html">招商加盟</a></li>
 				</ul>
 				<ul>
 					<li><a href="<%= request.getContextPath() %>/notice.html">公告</a></li>

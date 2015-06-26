@@ -46,6 +46,13 @@
     			<property name="service" value="YIWANGTONG" />
     		</bean>
     	</mvc:interceptor>
+    	<mvc:interceptor>
+    		<mvc:mapping path="/order/jiadian/**"/>
+    		<bean class="com.uguanjia.o2o.web.filter.ServiceContractInerceptor" >
+    			<property name="contractManger" ref="contractManger" />
+    			<property name="service" value="JIADIAN" />
+    		</bean>
+    	</mvc:interceptor>
     </mvc:interceptors>
    
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

@@ -21,10 +21,10 @@
                      <div class="row">
                         <div class="col-xs-12 center">
 <!-- PAGE CONTENT BEGINS -->
-		<input type="checkbox" class="ace ace-checkbox-2 contactCb" />
+		<input type="checkbox" class="contactCb" />
 		<label class="lbl">我已阅读该协议</label>
 		
-		<input type="checkbox" class="ace ace-checkbox-2 contactCb"/>
+		<input type="checkbox" class="contactCb"/>
 		<label class="lbl">我同意该协议内容条款</label>
 		
 		<button id="goBtn" class="btn btn-primary btn-sm">提交</button>

@@ -11,6 +11,7 @@ public enum Service {
 	,SHUNFENG       (3  ,"shunfeng","顺丰快递")
 	,CAINIAO        (4  ,"cainiao","菜鸟网络")
 	,YIWANGTONG     (5  ,"yiwangtong","壹网通")
+	,JIADIAN        (6  ,"jiadian","家电清洁")
 	,MAOWU          (101,"maowu","猫屋");
 	
 	public final int ID;
@@ -43,6 +44,9 @@ public enum Service {
 		case 5:
 			service = Service.YIWANGTONG;
 			break;
+        case 6:
+            service = Service.JIADIAN;
+            break;
 		default:
 			service = null;
 			break;
