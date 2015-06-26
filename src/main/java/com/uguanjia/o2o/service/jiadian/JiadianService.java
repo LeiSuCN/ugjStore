@@ -34,10 +34,12 @@ public class JiadianService
         
         assert orderManger != null;
         //
-        SqlSession session = orderManger.getSqlSessionFactory().openSession();
-        JiadianDao serviceDao = session.getMapper(JiadianDao.class);
-        //
-        List<ServiceItem> items = serviceDao.queryAllServiceItems();
+        List<ServiceItem> items = null;
+        try( SqlSession session = orderManger.getSqlSessionFactory().openSession()){
+        	 JiadianDao serviceDao = session.getMapper(JiadianDao.class);
+        	 items = serviceDao.queryAllServiceItems();
+        }
+        
         if( items == null ){
             logger.error("家电清洁项目为null");
             return null;
