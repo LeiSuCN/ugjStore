@@ -27,17 +27,7 @@
 													</div>
 													
 													<div style="clear: both;padding-top: 0.5em;  ">
-														<label for="registrationNo" class="col-xs-12 col-sm-2 control-label no-padding-right">工商注册号</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id=registrationNo name="registrationNo" class="width-100" disabled="disabled" 
-																	value='<c:out value="${store.registrationNo}" />'  />
-															</span>
-														</div>
-													</div>
-													
-													<div style="clear: both;padding-top: 0.5em;  ">
-														<label for="legalPerson" class="col-xs-12 col-sm-2 control-label no-padding-right">法定代表人</label>
+														<label for="legalPerson" class="col-xs-12 col-sm-2 control-label no-padding-right">负责人姓名</label>
 														<div class="col-xs-12 col-sm-8">
 															<span class="block input-icon input-icon-right">
 																<input type="text" id="legalPerson" name="legalPerson" class="width-100" disabled="disabled" 
@@ -47,11 +37,21 @@
 													</div>
 													
 													<div style="clear: both;padding-top: 0.5em;  ">
-														<label for="phonenumber" class="col-xs-12 col-sm-2 control-label no-padding-right">电话</label>
+														<label for="phonenumber" class="col-xs-12 col-sm-2 control-label no-padding-right">负责人电话</label>
 														<div class="col-xs-12 col-sm-8">
 															<span class="block input-icon input-icon-right">
 																<input type="text" id="phonenumber" name="phonenumber" class="width-100" disabled="disabled" 
 																	value='<c:out value="${store.phonenumber }" />'  />
+															</span>
+														</div>
+													</div>
+																										
+													<div style="clear: both;padding-top: 0.5em;  ">
+														<label for="alipay" class="col-xs-12 col-sm-2 control-label no-padding-right">负责人支付宝</label>
+														<div class="col-xs-12 col-sm-8">
+															<span class="block input-icon input-icon-right">
+																<input type="text" id="alipay" name="alipay" class="width-100" disabled="disabled" 
+																	value='<c:out value="${store.alipay }" />'  />
 															</span>
 														</div>
 													</div>
@@ -89,60 +89,9 @@
 															</span>
 														</div>
 													</div>
-																										
-													<div style="clear: both;padding-top: 0.5em;  ">
-														<label for="alipay" class="col-xs-12 col-sm-2 control-label no-padding-right">支付宝</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="alipay" name="alipay" class="width-100" disabled="disabled" 
-																	value='<c:out value="${store.alipay }" />'  />
-															</span>
-														</div>
-													</div>
 													
 													<div style="clear: both;padding-top: 0.5em;  ">
-														<label for="accountName" class="col-xs-12 col-sm-2 control-label no-padding-right">银行账户户名</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="accountName" name="accountName" class="width-100" disabled="disabled" 
-																	value='<c:out value="${store.account.name }" />'  />
-															</span>
-														</div>
-													</div>
-													
-													<div style="clear: both;padding-top: 0.5em;  ">
-														<label for="accountNumber" class="col-xs-12 col-sm-2 control-label no-padding-right">账号</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="accountNumber" name="accountNumber" class="width-100" disabled="disabled" 
-																	value='<c:out value="${store.account.number }" />'  />
-															</span>
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-
-													<div style="clear: both;padding-top: 0.5em;  ">
-														<label for="bank" class="col-xs-12 col-sm-2 control-label no-padding-right">开户行</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="bank" name="bank" class="width-100" disabled="disabled" 
-																	value='<c:out value="${store.account.bank }" />'  />
-															</span>
-														</div>
-													</div>
-
-													<div style="clear: both;padding-top: 0.5em;  ">
-														<label for="qq" class="col-xs-12 col-sm-2 control-label no-padding-right">QQ</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="qq" name="qq" class="width-100" disabled="disabled" 
-																	value='<c:out value="${store.qq }" />'  />
-															</span>
-														</div>
-													</div>
-													
-													<div style="clear: both;padding-top: 0.5em;  ">
-														<label for="bank" class="col-xs-12 col-sm-2 control-label no-padding-right">法人身份证（正面）</label>
+														<label for="bank" class="col-xs-12 col-sm-2 control-label no-padding-right">负责人身份证（正面）</label>
 														<div class="col-xs-12 col-sm-8">
 															<span class="block input-icon input-icon-right">
 																
@@ -162,7 +111,7 @@
 													</div>
 													
 													<div style="clear: both;padding-top: 0.5em;  ">
-														<label for="bank" class="col-xs-12 col-sm-2 control-label no-padding-right">法人身份证（反面）</label>
+														<label for="bank" class="col-xs-12 col-sm-2 control-label no-padding-right">负责人身份证（反面）</label>
 														<div class="col-xs-12 col-sm-8">
 															<span class="block input-icon input-icon-right">
 																
@@ -174,26 +123,6 @@
 																<% } else { %>
 																<a href='<c:url value="/store/detail/scanning/idcard_b" /> ' target="_blank">
 																	<img alt="" src=' <c:url value="/store/detail/scanning/idcard_b" /> '  style="height:60px;">
-																</a>
-																<% } %>
-																
-															</span>
-														</div>
-													</div>
-													
-													<div style="clear: both;padding-top: 0.5em;  ">
-														<label for="bank" class="col-xs-12 col-sm-2 control-label no-padding-right">营业执照</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																
-																<% if( OperatorUtils.getCurrentOperator() != null && OperatorUtils.getCurrentOperator().hasRole(Roles.ROLE_ADMIN) ) {%>
-																<a href='<c:url value="/admin/store/detail/${store.id }/scanning/license" /> ' target="_blank">
-																	<img alt="" src=' <c:url value="/admin/store/detail/${store.id }/scanning/license" /> '  style="height:60px;">
-																</a>
-																
-																<% } else { %>
-																<a href='<c:url value="/store/detail/scanning/license" /> ' target="_blank">
-																	<img alt="" src=' <c:url value="/store/detail/scanning/license" /> '  style="height:60px;">
 																</a>
 																<% } %>
 																

@@ -157,11 +157,13 @@ public class StoreManger extends BaseManger{
 				
 				long storeId = store.getId();
 				
+				/*
 				// 门店账号信息
 				StoreAccount account = store.getAccount();
 				account.setStoreId(storeId);
 				storeDao.replaceStoreApplyAccountInfo(account);
-				
+					*/
+			
 				// 门店服务账号
 				List<StoreServiceAccount> serviceAccounts = store.getServiceAccounts();
 				if( serviceAccounts != null )
@@ -177,6 +179,7 @@ public class StoreManger extends BaseManger{
 				user = new User();
 				user.setUsername(username);
 				user.setStoreId(storeId);
+				/*
 				// 密码默认为工商注册号后六位
 				String password = String.valueOf(store.getRegistrationNo());
 				int len = password.length();
@@ -184,6 +187,9 @@ public class StoreManger extends BaseManger{
 				{
 					password = password.substring(len - 6);
 				}
+				*/
+				// 密码默认为用户名
+				String password = username;
 				user.setPassword(password);
 				storeDao.insertStoreUser(user);
 				

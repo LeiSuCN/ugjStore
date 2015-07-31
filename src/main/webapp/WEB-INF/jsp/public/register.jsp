@@ -95,31 +95,7 @@
 													</div>
 													
 													<div class="form-group">
-														<label for="cainiao" class="col-xs-12 col-sm-2 control-label no-padding-right">菜鸟编号（可选）</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="cainiao" name="cainiao" class="width-100" 
-																	value='<c:out value="${requestScope.cainiao }" />'  />
-																<i class="ace-icon fa fa-pencil-square-o"></i>
-															</span>
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-													
-													<div class="form-group">
-														<label for="registrationNo" class="col-xs-12 col-sm-2 control-label no-padding-right">工商营业执照编号</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id=registrationNo name="registrationNo" rules="empty int length 15" class="width-100 input-check" 
-																	value='<c:out value="${store.registrationNo}" />'  />
-																<i class="ace-icon fa fa-pencil-square-o"></i>
-															</span>
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-													
-													<div class="form-group">
-														<label for="legalPerson" class="col-xs-12 col-sm-2 control-label no-padding-right">法定代表人</label>
+														<label for="legalPerson" class="col-xs-12 col-sm-2 control-label no-padding-right">负责人姓名</label>
 														<div class="col-xs-12 col-sm-8">
 															<span class="block input-icon input-icon-right">
 																<input type="text" id="legalPerson" name="legalPerson" rules="empty" class="width-100 input-check" 
@@ -131,7 +107,7 @@
 													</div>
 													
 													<div class="form-group">
-														<label for="phonenumber" class="col-xs-12 col-sm-2 control-label no-padding-right">电话</label>
+														<label for="phonenumber" class="col-xs-12 col-sm-2 control-label no-padding-right">负责人手机</label>
 														<div class="col-xs-12 col-sm-8">
 															<span class="block input-icon input-icon-right">
 																<input type="text" id="phonenumber" name="phonenumber" rules="empty mobile" class="width-100 input-check" 
@@ -141,6 +117,30 @@
 														</div>
 														<div class="help-block col-xs-12 col-sm-reset inline"></div>
 													</div>
+																																				
+													<div class="form-group">
+														<label for="alipay" class="col-xs-12 col-sm-2 control-label no-padding-right">负责人支付宝</label>
+														<div class="col-xs-12 col-sm-8">
+															<span class="block input-icon input-icon-right">
+																<input type="text" id="alipay" name="alipay" rules="empty" class="width-100 input-check" 
+																	value='<c:out value="${store.alipay }" />'  />
+																<i class="ace-icon fa fa-pencil-square-o"></i>
+															</span>
+														</div>
+														<div class="help-block col-xs-12 col-sm-reset inline"></div>
+													</div>
+
+													<div class="form-group">
+														<label for="idcard_a" class="col-xs-12 col-sm-2 control-label no-padding-right">负责人身份证</label>
+														<div class="col-xs-6 col-sm-4">
+															<input type="file" id="idcard_a" name="idcard_a" rules="empty" class="ugj-input-file input-check" />
+														</div>
+														<div class="col-xs-6 col-sm-4">
+															<input type="file" id="idcard_b" name="idcard_b" rules="empty" class="ugj-input-file input-check" />
+														</div>
+														<div class="help-block col-xs-12 col-sm-reset inline"></div>
+													</div>
+
 													
 													<div class="form-group" style="  margin-bottom: 70px;">
 														<label for="address" class="col-xs-12 col-sm-2 control-label no-padding-right">地址</label>
@@ -182,109 +182,21 @@
 														</div>
 														<div class="help-block col-xs-12 col-sm-reset inline"></div>
 													</div>	
-													
-													<div class="form-group hide" id="bm" style="height:400px;" >
-													</div>			
-																																				
+
 													<div class="form-group">
-														<label for="alipay" class="col-xs-12 col-sm-2 control-label no-padding-right">支付宝</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="alipay" name="alipay" rules="empty" class="width-100 input-check" 
-																	value='<c:out value="${store.alipay }" />'  />
-																<i class="ace-icon fa fa-pencil-square-o"></i>
-															</span>
+														<label for="store_a" class="col-xs-12 col-sm-2 control-label no-padding-right">店面照片</label>
+														<div class="col-xs-6 col-sm-4">
+															<input type="file" id="store_a" name="store_a" rules="empty" class="ugj-input-file input-check" />
+														</div>
+														<div class="col-xs-6 col-sm-4">
+															<input type="file" id="store_b" name="store_b" rules="empty" class="ugj-input-file input-check" />
 														</div>
 														<div class="help-block col-xs-12 col-sm-reset inline"></div>
 													</div>
 													
-													<div class="form-group">
-														<label for="accountName" class="col-xs-12 col-sm-2 control-label no-padding-right">银行账户户名</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="accountName" name="accountName" rules="empty" class="width-100 input-check" 
-																	value='<c:out value="${store.account.name }" />'  />
-																<i class="ace-icon fa fa-pencil-square-o"></i>
-															</span>
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-													
-													<div class="form-group">
-														<label for="accountNumber" class="col-xs-12 col-sm-2 control-label no-padding-right">账号</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="accountNumber" name="accountNumber" rules="empty int" class="width-100 input-check" 
-																	value='<c:out value="${store.account.number }" />'  />
-																<i class="ace-icon fa fa-pencil-square-o"></i>
-															</span>
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
+													<div class="form-group hide" id="bm" style="height:400px;" >
+													</div>			
 
-													<div class="form-group">
-														<label for="bank" class="col-xs-12 col-sm-2 control-label no-padding-right">开户行</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="bank" name="bank" rules="empty" class="width-100 input-check" 
-																	value='<c:out value="${store.account.bank }" />'  />
-																<i class="ace-icon fa fa-pencil-square-o"></i>
-															</span>
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-
-													<div class="form-group">
-														<label for="qq" class="col-xs-12 col-sm-2 control-label no-padding-right">QQ</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="qq" name="qq" rules="empty" class="width-100 input-check" 
-																	value='<c:out value="${store.qq }" />'  />
-																<i class="ace-icon fa fa-pencil-square-o"></i>
-															</span>
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-
-													<div class="form-group">
-														<label for="idcard_a" class="col-xs-12 col-sm-2 control-label no-padding-right">法人身份证（正面）</label>
-														<div class="col-xs-12 col-sm-8">
-															<input multiple=""  type="file" id="idcard_a" name="idcard_a" rules="empty" class="ugj-input-file input-check" />
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-													
-													<div class="form-group">
-														<label for="idcard_b" class="col-xs-12 col-sm-2 control-label no-padding-right">法人身份证（反面）</label>
-														<div class="col-xs-12 col-sm-8">
-															<input multiple=""  type="file" id="idcard_b" name="idcard_b" rules="empty" class="ugj-input-file input-check" />
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-
-													<div class="form-group">
-														<label for="license" class="col-xs-12 col-sm-2 control-label no-padding-right">营业执照</label>
-														<div class="col-xs-12 col-sm-8">
-															<input multiple=""  type="file" id="license" name="license" rules="empty" class="ugj-input-file input-check" />
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-
-													<div class="form-group">
-														<label for="store_a" class="col-xs-12 col-sm-2 control-label no-padding-right">店面照片（外景）</label>
-														<div class="col-xs-12 col-sm-8">
-															<input multiple=""  type="file" id="store_a" name="store_a" rules="empty" class="ugj-input-file input-check" />
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-													
-													<div class="form-group">
-														<label for="store_b" class="col-xs-12 col-sm-2 control-label no-padding-right">店面照片（内景）</label>
-														<div class="col-xs-12 col-sm-8">
-															<input multiple=""  type="file" id="store_b" name="store_b" rules="empty" class="ugj-input-file input-check" />
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
 
 													<label class="block center">
 														<input type="checkbox" class="ace" id="aggreeChk" />
@@ -472,35 +384,27 @@
 			}
 		
 			jQuery(function($) {
-				$('.ugj-input-file').ace_file_input({
-					style:'well',
-					btn_choose:'请上传扫描件',
-					btn_change:null,
-					no_icon:'ace-icon fa fa-cloud-upload',
-					droppable:true,
-					thumbnail:'small'//large | fit
-					//,icon_remove:null//set null, to hide remove/reset button
-					/**,before_change:function(files, dropped) {
-						//Check an example below
-						//or examples/file-upload.html
-						return true;
-					}*/
-					/**,before_remove : function() {
-						return true;
-					}*/
-					,
-					preview_error : function(filename, error_code) {
-						//name of the file that failed
-						//error_code values
-						//1 = 'FILE_LOAD_FAILED',
-						//2 = 'IMAGE_LOAD_FAILED',
-						//3 = 'THUMBNAIL_FAILED'
-						//alert(error_code);
-					}
-			
-				}).on('change', function(){
-					//console.log($(this).data('ace_input_files'));
-					//console.log($(this).data('ace_input_method'));
+				
+				var fileOpt = {
+						style:'well',
+						btn_choose:'照片',
+						btn_change:null,
+						no_icon:'ace-icon fa fa-cloud-upload',
+						droppable:true,
+						thumbnail:'small',
+						preview_error : function(filename, error_code) {
+							//1 = 'FILE_LOAD_FAILED' 2 = 'IMAGE_LOAD_FAILED' 3 = 'THUMBNAIL_FAILED'
+							alert(error_code);
+						}
+				
+				};
+				
+				$('#idcard_a').ace_file_input( $.extend({}, fileOpt, {btn_choose:'身份证正面照片'}) );
+				$('#idcard_b').ace_file_input( $.extend({}, fileOpt, {btn_choose:'身份证反面照片'}) );			
+				$('#store_a').ace_file_input( $.extend({}, fileOpt, {btn_choose:'店面外景照片'}) );
+				$('#store_b').ace_file_input( $.extend({}, fileOpt, {btn_choose:'店面内景照片'}) );						
+				
+				$('.ugj-input-file').on('change', function(){
 					var $ipt = $(this);
 
 					inputCheck( $ipt );

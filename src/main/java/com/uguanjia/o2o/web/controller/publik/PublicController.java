@@ -166,6 +166,7 @@ public class PublicController {
 			{
 				errorFields.add(para);
 			}
+			/*
 			// 工商注册号
 			para = "registrationNo";
 			store.setRegistrationNo(NumberUtils.toLong(request.getParameter(para), -1));
@@ -174,6 +175,7 @@ public class PublicController {
 			{
 				errorFields.add(para);
 			}
+			*/
 			// 法定代表人
 			para = "legalPerson";
 			store.setLegalPerson(request.getParameter(para));
@@ -246,14 +248,15 @@ public class PublicController {
 				}
 			}
 			
-			// 邮编
+			// 支付宝
 			para = "alipay";
 			store.setAlipay(request.getParameter(para));
 			if( StringUtils.isEmpty(store.getAlipay()) )
 			{
 				errorFields.add(para);
 			}
-			// 邮编
+			/*
+			// 
 			para = "qq";
 			store.setQq(NumberUtils.toLong(request.getParameter(para)));
 			if( store.getQq() < 10000 )
@@ -282,7 +285,7 @@ public class PublicController {
 			{
 				errorFields.add(para);
 			}
-			
+			*/
 			
 			MultipartFile file = null;
 			// 法人身份证（正面）
@@ -297,7 +300,7 @@ public class PublicController {
 			if( file == null || file.getSize() <= 0 ){
 				errorFields.add(para);
 			}
-			
+			/*
 			if( request.getParameter("cainiao") != null )
 			{
 				StoreServiceAccount maowuAccount = new StoreServiceAccount();
@@ -310,7 +313,7 @@ public class PublicController {
 				
 				store.setServiceAccounts(serviceAccount);
 			}
-
+			*/
 			
 			if( errorFields.size() > 0 )
 			{
@@ -325,7 +328,7 @@ public class PublicController {
 					long storeId = store.getId();
 					saveFile(storeId, "idcard_a", multipartRequest);
 					saveFile(storeId, "idcard_b", multipartRequest);
-					saveFile(storeId, "license", multipartRequest);
+					//saveFile(storeId, "license", multipartRequest);
 					saveFile(storeId, "store_a", multipartRequest);
 					saveFile(storeId, "store_b", multipartRequest);
 					

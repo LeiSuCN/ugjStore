@@ -94,31 +94,7 @@
 													</div>
 													
 													<div class="form-group">
-														<label for="cainiao" class="col-xs-12 col-sm-2 control-label no-padding-right">菜鸟编号（可选）</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="cainiao" name="cainiao" class="width-100" 
-																	value='<c:out value="${requestScope.cainiao }" />'  />
-																<i class="ace-icon fa fa-pencil-square-o"></i>
-															</span>
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-													
-													<div class="form-group">
-														<label for="registrationNo" class="col-xs-12 col-sm-2 control-label no-padding-right">工商营业执照编号</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id=registrationNo name="registrationNo" rules="empty int length 15" class="width-100 input-check" 
-																	value='<c:out value="${store.registrationNo}" />'  />
-																<i class="ace-icon fa fa-pencil-square-o"></i>
-															</span>
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-													
-													<div class="form-group">
-														<label for="legalPerson" class="col-xs-12 col-sm-2 control-label no-padding-right">法定代表人</label>
+														<label for="legalPerson" class="col-xs-12 col-sm-2 control-label no-padding-right">负责人姓名</label>
 														<div class="col-xs-12 col-sm-8">
 															<span class="block input-icon input-icon-right">
 																<input type="text" id="legalPerson" name="legalPerson" rules="empty" class="width-100 input-check" 
@@ -130,13 +106,47 @@
 													</div>
 													
 													<div class="form-group">
-														<label for="phonenumber" class="col-xs-12 col-sm-2 control-label no-padding-right">电话</label>
+														<label for="phonenumber" class="col-xs-12 col-sm-2 control-label no-padding-right">负责人手机</label>
 														<div class="col-xs-12 col-sm-8">
 															<span class="block input-icon input-icon-right">
 																<input type="text" id="phonenumber" name="phonenumber" rules="empty mobile" class="width-100 input-check" 
 																	value='<c:out value="${store.phonenumber }" />'  />
 																<i class="ace-icon fa fa-pencil-square-o"></i>
 															</span>
+														</div>
+														<div class="help-block col-xs-12 col-sm-reset inline"></div>
+													</div>
+													
+													<div class="form-group">
+														<label for="alipay" class="col-xs-12 col-sm-2 control-label no-padding-right">负责人支付宝</label>
+														<div class="col-xs-12 col-sm-8">
+															<span class="block input-icon input-icon-right">
+																<input type="text" id="alipay" name="alipay" rules="empty" class="width-100 input-check" 
+																	value='<c:out value="${store.alipay }" />'  />
+																<i class="ace-icon fa fa-pencil-square-o"></i>
+															</span>
+														</div>
+														<div class="help-block col-xs-12 col-sm-reset inline"></div>
+													</div>
+
+													<div class="form-group">
+														<label for="idcard_a" class="col-xs-12 col-sm-2 control-label no-padding-right">负责人身份证（正面）</label>
+														<div class="col-xs-6 col-sm-6">
+															<input type="file" id="idcard_a" name="idcard_a" class="ugj-input-file" />
+														</div>
+														<div class="col-xs-2 col-sm-2">
+															<a class="btn btn-xs" target="_blank" href=" <c:url value="/store/detail/scanning/idcard_a" /> ">查看原图</a>
+														</div>
+														<div class="help-block col-xs-12 col-sm-reset inline"></div>
+													</div>
+													
+													<div class="form-group">
+														<label for="idcard_b" class="col-xs-12 col-sm-2 control-label no-padding-right">负责人身份证（反面）</label>
+														<div class="col-xs-6 col-sm-6">
+															<input type="file" id="idcard_b" name="idcard_b" class="ugj-input-file" />
+														</div>
+														<div class="col-xs-2 col-sm-2">
+															<a class="btn btn-xs">查看原图</a>
 														</div>
 														<div class="help-block col-xs-12 col-sm-reset inline"></div>
 													</div>
@@ -184,99 +194,6 @@
 													
 													<div class="form-group hide" id="bm" style="height:400px;" >
 													</div>	
-													
-													<div class="form-group">
-														<label for="alipay" class="col-xs-12 col-sm-2 control-label no-padding-right">支付宝</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="alipay" name="alipay" rules="empty" class="width-100 input-check" 
-																	value='<c:out value="${store.alipay }" />'  />
-																<i class="ace-icon fa fa-pencil-square-o"></i>
-															</span>
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-													
-													<div class="form-group">
-														<label for="accountName" class="col-xs-12 col-sm-2 control-label no-padding-right">银行账户户名</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="accountName" name="accountName" rules="empty" class="width-100 input-check" 
-																	value='<c:out value="${store.account.name }" />'  />
-																<i class="ace-icon fa fa-pencil-square-o"></i>
-															</span>
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-													
-													<div class="form-group">
-														<label for="accountNumber" class="col-xs-12 col-sm-2 control-label no-padding-right">账号</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="accountNumber" name="accountNumber" rules="empty int" class="width-100 input-check" 
-																	value='<c:out value="${store.account.number }" />'  />
-																<i class="ace-icon fa fa-pencil-square-o"></i>
-															</span>
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-
-													<div class="form-group">
-														<label for="bank" class="col-xs-12 col-sm-2 control-label no-padding-right">开户行</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="bank" name="bank" rules="empty" class="width-100 input-check" 
-																	value='<c:out value="${store.account.bank }" />'  />
-																<i class="ace-icon fa fa-pencil-square-o"></i>
-															</span>
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-
-													<div class="form-group">
-														<label for="qq" class="col-xs-12 col-sm-2 control-label no-padding-right">QQ</label>
-														<div class="col-xs-12 col-sm-8">
-															<span class="block input-icon input-icon-right">
-																<input type="text" id="qq" name="qq" rules="empty" class="width-100 input-check" 
-																	value='<c:out value="${store.qq }" />'  />
-																<i class="ace-icon fa fa-pencil-square-o"></i>
-															</span>
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-
-													<div class="form-group">
-														<label for="idcard_a" class="col-xs-12 col-sm-2 control-label no-padding-right">法人身份证（正面）</label>
-														<div class="col-xs-6 col-sm-6">
-															<input type="file" id="idcard_a" name="idcard_a" class="ugj-input-file" />
-														</div>
-														<div class="col-xs-2 col-sm-2">
-															<a class="btn btn-xs" target="_blank" href=" <c:url value="/store/detail/scanning/idcard_a" /> ">查看原图</a>
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-													
-													<div class="form-group">
-														<label for="idcard_b" class="col-xs-12 col-sm-2 control-label no-padding-right">法人身份证（反面）</label>
-														<div class="col-xs-6 col-sm-6">
-															<input type="file" id="idcard_b" name="idcard_b" class="ugj-input-file" />
-														</div>
-														<div class="col-xs-2 col-sm-2">
-															<a class="btn btn-xs">查看原图</a>
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
-
-													<div class="form-group">
-														<label for="license" class="col-xs-12 col-sm-2 control-label no-padding-right">营业执照</label>
-														<div class="col-xs-6 col-sm-6">
-															<input type="file" id="license" name="license" class="ugj-input-file" />
-														</div>
-														<div class="col-xs-2 col-sm-2">
-															<a class="btn btn-xs">查看原图</a>
-														</div>
-														<div class="help-block col-xs-12 col-sm-reset inline"></div>
-													</div>
 
 													<div class="form-group">
 														<label for="store_a" class="col-xs-12 col-sm-2 control-label no-padding-right">店面照片（外景）</label>
