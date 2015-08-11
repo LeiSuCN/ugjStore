@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <title>优管家</title>
@@ -59,18 +60,46 @@
 	display: inline-block;
 	border-radius: 20px;
 	cursor: pointer;
-	background: url(style/images/yewu/service.png);
-	height: 96px
+	height: 96px;
+	width: 240px;
+	text-align: left;
+}
+
+.serviceInfo a:hover{
+    background-color: rgba(252, 95, 2, 0.4);
 }
 
 .serviceInfo img{
-  	width: 240px;
+  	float: left;
+  	width: 96px;s
   	height: 96px;
   	border-style: none;
 }
 
-.serviceInfo img:hover{
-    opacity: 0.3;
+
+.serviceInfo div{
+	font-size: 24px;
+	float: right;
+	width: 140px;
+  	height: 4em;
+  	padding: .5em 0;
+}
+
+.serviceInfo span{
+	display: inline-block;
+	width: 100%;
+	color: #444;
+	font-family: '微软雅黑', Arial;
+	letter-spacing: .1em;
+	text-align: center;
+}
+
+.serviceInfo span.row2{
+	line-height: 1.5em;
+}
+
+.serviceInfo span.row1{
+	line-height: 3em;
 }
 
 .service-title{
@@ -83,6 +112,41 @@
 	font-family: tahoma, arial, 宋体, sans-serif;
 	color:white;
 	background: -webkit-linear-gradient( top,#FE8920,#FC5F02);
+}
+
+.qqInfo{
+	background-color: white;
+	font-family: '微软雅黑', arial, 宋体, sans-serif;
+	position: fixed;
+  	top: 50%;
+  	right: 0em;
+  	border: 2px solid #0176ba;
+  	font-size: 14px;
+}
+
+.qqInfo h1{
+	background: #038bdc;
+	text-align: left;
+	font-size: 1.2em;
+	margin: 0;
+	padding: .2em;
+	color: white;
+	font-weight: normal;
+}
+
+.qqInfo div{
+	  	padding: .5em 1em;
+}
+
+.qqInfo a{
+	display: block;
+	color: #666;
+	text-decoration: none;
+	vertical-align: middle;
+}
+
+.qqInfo a img{
+	vertical-align: middle;
 }
 
 </style>
@@ -139,15 +203,84 @@ var _hmt = _hmt || [];
 
 			</div>
 			<div class="serviceInfo">
-				<a href="/order/shunfeng/place" target="_blank"><img src="style/images/yewu/service_shunfeng.jpg"></a>
-				<a href="/order/xiaobaitu/place" target="_blank"><img src="style/images/yewu/service_xiaobaitu.jpg"></a>
-				<a href="/order/yiwangtong/place" target="_blank"><img src="style/images/yewu/service_chongzhi.jpg"></a>
-				<a><img src="style/images/yewu/service_baishihuitong.jpg"></a>
-				<a href="/order/zhaopianchongxi/place" target="_blank"><img src="style/images/yewu/service_zhaopian.jpg"></a>
-				<a><img src="style/images/yewu/service_yinsheng.jpg"></a>
-				<a href="http://cainiaoyz.i56.taobao.com/" target="_blank"><img src="style/images/yewu/service_cainiao.jpg"></a>
-				<a href="/order/jiadian/place" target="_blank"><img src="style/images/yewu/service_jiadian.png"></a>
-				<a href="http://www.qfkd.com.cn/index.aspx" target="_blank"><img src="style/images/yewu/service_quanfeng.png"></a>
+				<a href="http://www.mailworld.org/" target="_blank">
+					<img src="style/images/yewu/service_mw.png">
+					<div>
+						<span class="row2">猫屋男孩</span>
+						<span class="row2">生鲜供应链</span>
+					</div>
+				</a>
+				<a href="/order/xiaobaitu/place" target="_blank">
+					<img src="style/images/yewu/service_xbt.png">
+					<div>
+						<span class="row2">小白兔</span>
+						<span class="row2">干洗代收</span>
+					</div>
+				</a>
+				<a>
+					<img src="style/images/yewu/service_pos.png">
+					<div>
+						<span class="row2">POS机</span>
+						<span class="row2">代办平台</span>
+					</div>
+				</a>
+				<a href="http://cainiaoyz.i56.taobao.com" target="_blank">
+					<img src="style/images/yewu/service_cn.png">
+					<div>
+						<span class="row2">菜鸟驿站</span>
+						<span class="row2">代收包裹</span>
+					</div>
+				</a>
+				<a href="/order/shunfeng/place" target="_blank">
+					<img src="style/images/yewu/service_sf.png">
+					<div>
+						<span class="row2">顺丰快递</span>
+						<span class="row2">代收代发</span>
+					</div>
+				</a>
+				<a>
+					<img src="style/images/yewu/service_bsht.png">
+					<div>
+						<span class="row2">百世汇通</span>
+						<span class="row2">代收代发</span>
+					</div>
+				</a>
+				<a href="/order/yiwangtong/place" target="_blank">
+					<img src="style/images/yewu/service_ywt.png">
+					<div>
+						<span class="row2">壹网通</span>
+						<span class="row2">空中充值</span>
+					</div>
+				</a>
+				<a href="/order/zhaopianchongxi/place" target="_blank">
+					<img src="style/images/yewu/service_zpcx.png">
+					<div>
+						<span class="row2">柯达相纸</span>
+						<span class="row2">照片冲洗</span>
+					</div>
+				</a>
+				<a href="/order/jiadian/place" target="_blank">
+					<img src="style/images/yewu/service_ajj.png">
+					<div>
+						<span class="row2">家电</span>
+						<span class="row2">清洁维修</span>
+					</div>
+				</a>
+				<a href="http://www.qfkd.com.cn/index.aspx" target="_blank">
+					<img src="style/images/yewu/service_qf.png">
+					<div>
+						<span class="row2">全峰</span>
+						<span class="row2">代收代发</span>
+					</div>
+				</a>
+			</div>
+			<div class="qqInfo">
+				<h1>客服中心</h1>
+				<div>
+					<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2355543766&site=qq&menu=yes">业务客服：<img border="0" src="http://wpa.qq.com/pa?p=2:2355543766:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
+					<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2355543763&site=qq&menu=yes">财务客服：<img border="0" src="http://wpa.qq.com/pa?p=2:2355543763:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
+					<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2603153214&site=qq&menu=yes">技术支持：<img border="0" src="http://wpa.qq.com/pa?p=2:2603153214:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
+				</div>
 			</div>
 			<div class="footer">
 				<div class="footerContent">Copyright©  2013-2020    All Rights Reserved</div>

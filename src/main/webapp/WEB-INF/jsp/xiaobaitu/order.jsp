@@ -84,7 +84,7 @@
 					<div class="radio" style="display:inline-block">
 						<label>
 							<input name="payment" type="radio" class="ace" value="1" />
-							<span class="lbl"> 现金</span>
+							<span class="lbl"> 转账</span>
 						</label>
 					</div>
 					<div class="radio" style="display:inline-block">
@@ -104,7 +104,7 @@
 				<label class="label label-xlg label-warning">支付凭证:</label>
 					<div class="radio" style="display:inline-block">
 						<label>
-							<input type="text" id="voucher" name="voucher" style="width:30em" />
+							<input type="text" id="voucher" name="voucher" style="width:30em" placeholder="转账流水号，支付宝流水号，洗衣券号，洗衣卡号等"/>
 						</label>
 					</div>
 			</div>
