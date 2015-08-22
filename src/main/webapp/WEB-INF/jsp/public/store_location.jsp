@@ -16,7 +16,7 @@
 
 	$(document).ready(function(){
 
-		var point = {lon:<c:out value="${requestScope.lng}" />, lat: <c:out value="${requestScope.lat}" />};
+		var point = {lat:<c:out value="${requestScope.lng}" />, lon: <c:out value="${requestScope.lat}" />};
 
 		var locationPicker = new LocationPicker('bm',{
 			enableClick: false,
@@ -25,6 +25,8 @@
 			center: point,
 			zoom: 20
 		});
+		
+		locationPicker.pick(new AMap.LngLat(point.lat, point.lon));
 	});
 </script>
 </html>
