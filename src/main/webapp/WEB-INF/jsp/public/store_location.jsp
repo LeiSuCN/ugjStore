@@ -10,13 +10,13 @@
 	<div id="bm" style="width:800px; height:400px; "></div>
 </body>
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=nsNo6385eG8L0jfcaFPVThXX"></script>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=fb41f5a7451770da0be1e646d4cf9087"></script>
 <script type="text/javascript" src="<%= request.getContextPath() %>/js/locationPicker.js"></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
 
-		var point = new BMap.Point(<c:out value="${requestScope.lng}" />, <c:out value="${requestScope.lat}" />);
+		var point = {lon:<c:out value="${requestScope.lng}" />, lat: <c:out value="${requestScope.lat}" />};
 
 		var locationPicker = new LocationPicker('bm',{
 			enableClick: false,
@@ -25,9 +25,6 @@
 			center: point,
 			zoom: 20
 		});
-
-		
-		locationPicker.pick( point );
 	});
 </script>
 </html>

@@ -182,6 +182,9 @@
 														</div>
 														<div class="help-block col-xs-12 col-sm-reset inline"></div>
 													</div>	
+													
+													<div class="form-group hide" id="bm" style="height:400px;" >
+													</div>			
 
 													<div class="form-group">
 														<label for="store_a" class="col-xs-12 col-sm-2 control-label no-padding-right">店面照片</label>
@@ -194,8 +197,6 @@
 														<div class="help-block col-xs-12 col-sm-reset inline"></div>
 													</div>
 													
-													<div class="form-group hide" id="bm" style="height:400px;" >
-													</div>			
 
 
 													<label class="block center">
@@ -275,7 +276,7 @@
         <script src="<%= request.getContextPath() %>/portal/js/language/css.js"></script>
         <script src="<%= request.getContextPath() %>/portal/js/language/javascript.js"></script>
         
-        <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=nsNo6385eG8L0jfcaFPVThXX"></script>
+        <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=fb41f5a7451770da0be1e646d4cf9087"></script>
 		<script type="text/javascript" src="<%= request.getContextPath() %>/js/locationPicker.js"></script>
 
 		<!-- inline scripts related to this page -->
